@@ -1,0 +1,1 @@
+Concept: Take the top of the week from [Shreddit](reddit.com/r/metal) and pipe it into a spotify playlist.
