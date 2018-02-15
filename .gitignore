@@ -1,3 +1,7 @@
+# Project Based Ignore
+*.ini
+
+# Generic Python Ignore from Github
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
