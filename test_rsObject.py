@@ -9,8 +9,11 @@ class TestrsObject(unittest.TestCase):
             loadedJson = json.load(testJson)
             for i in range(0, len(loadedJson)):
                 with self.subTest(i=loadedJson[i]):
-                    musicObject = rsObject(loadedJson[i])
-                    self.assertEqual(str(musicObject.ogTitle)[0], '{')
+                    rso = rsObject(loadedJson[i]["ogTitle"])
+                    self.assertEqual(rso.ogTitle, loadedJson[i]["ogTitle"])
+                    if(rso.parsable):
+                        self.assertEqual(rso.artist, loadedJson[i]["artist"])
+                        self.assertEqual(rso.track, loadedJson[i]["track"])
 
 if __name__ == '__main__':
     unittest.main()
