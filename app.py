@@ -1,13 +1,13 @@
 import praw
 import re
-import rsObject
+from rsObject import rsObject
 
 reddit = praw.Reddit('shreddit2spotify')
 
 # Possible regex
 # https://regex101.com/r/T3eOko/4/
 def parseTitle(title):
-    return rsObject.rsObject(title)
+    return rsObject(title)
 
 def main():
     print('Running in read only mode?')

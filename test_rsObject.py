@@ -1,5 +1,5 @@
 import json
-import rsObject
+from rsObject import rsObject
 import unittest
 
 class TestrsObject(unittest.TestCase):
@@ -8,10 +8,9 @@ class TestrsObject(unittest.TestCase):
         with open('testCases.json', 'r') as testJson:
             loadedJson = json.load(testJson)
             for i in range(0, len(loadedJson)):
-                with self.subTest(i=i):
-                    print(str(loadedJson[i])[0])
-                    self.assertEqual(str(loadedJson[i])[0], '{')
-                # print(loadedJson[i])
+                with self.subTest(i=loadedJson[i]):
+                    musicObject = rsObject(loadedJson[i])
+                    self.assertEqual(str(musicObject.ogTitle)[0], '{')
 
 if __name__ == '__main__':
     unittest.main()
