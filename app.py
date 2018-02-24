@@ -1,12 +1,13 @@
 import praw
 import re
+import rsObject
 
 reddit = praw.Reddit('shreddit2spotify')
 
 # Possible regex
-# (?P<genre>\[.*\])?[ -]*(?P<artist>[^-\n]*) - (?P<song>[^-\(\[\n]*)(?P<misc>[-\(\[].*)?
+# https://regex101.com/r/T3eOko/4/
 def parseTitle(title):
-    return title
+    return rsObject.rsObject(title)
 
 def main():
     print('Running in read only mode?')
