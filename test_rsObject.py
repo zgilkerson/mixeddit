@@ -4,7 +4,7 @@ import unittest
 
 class TestrsObject(unittest.TestCase):
 
-    def test_isParsable(self):
+    def test_titleParsing(self):
         with open('testCases.json', 'r') as testJson:
             loadedJson = json.load(testJson)
             for i in range(0, len(loadedJson)):
@@ -14,6 +14,9 @@ class TestrsObject(unittest.TestCase):
                     if(loadedJson[i]["parsable"]):
                         self.assertEqual(rso.artist, loadedJson[i]["artist"])
                         self.assertEqual(rso.track, loadedJson[i]["track"])
+                    else:
+                        self.assertIsNone(rso.artist)
+                        self.assertIsNone(rso.track)
 
 if __name__ == '__main__':
     unittest.main()

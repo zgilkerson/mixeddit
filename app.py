@@ -1,11 +1,10 @@
 import praw
-import re
 from rsObject import rsObject
 
 reddit = praw.Reddit('shreddit2spotify')
 
 # Possible regex
-# https://regex101.com/r/T3eOko/4/
+# https://regex101.com/r/T3eOko/10
 def parseTitle(title):
     return rsObject(title)
 
