@@ -12,8 +12,11 @@ def main():
     print('Running in read only mode?')
     if reddit.read_only is not True:
         exit()
+    rsObjects = []
     for submission in reddit.subreddit('metal').top('week', limit=100):
-        print(parseTitle(submission.title))
+        parsedTitle = parseTitle(submission.title)
+        if parsedTitle.valid:
+            rsObjects.append(parsedTitle)
 
 if __name__ == '__main__':
     main()

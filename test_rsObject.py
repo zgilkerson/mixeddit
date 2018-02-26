@@ -11,7 +11,7 @@ class TestrsObject(unittest.TestCase):
                 with self.subTest(i=loadedJson[i]):
                     rso = rsObject(loadedJson[i]["ogTitle"])
                     self.assertEqual(rso.ogTitle, loadedJson[i]["ogTitle"])
-                    if(loadedJson[i]["parsable"]):
+                    if(loadedJson[i]["valid"]):
                         self.assertEqual(rso.artist, loadedJson[i]["artist"])
                         self.assertEqual(rso.track, loadedJson[i]["track"])
                     else:

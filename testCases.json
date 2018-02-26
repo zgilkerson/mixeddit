@@ -1,601 +1,601 @@
 [
     {
         "ogTitle": "California's Alameda County Declares Feb. 10 'Cliff Burton Day' in Honor of Late Metallica Bassist's Birthday",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Glenn Tipton (Judas Priest) diagnosed with Parkinson's",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "High On Fire - Snakes For The Divine",
-        "parsable": true,
+        "valid": true,
         "artist": "High On Fire",
         "track": "Snakes For The Divine"
     },
     {
         "ogTitle": "Elder - Compendium",
-        "parsable": true,
+        "valid": true,
         "artist": "Elder",
         "track": "Compendium"
     },
     {
         "ogTitle": "Kamelot - March of Mephisto",
-        "parsable": true,
+        "valid": true,
         "artist": "Kamelot",
         "track": "March of Mephisto"
     },
     {
         "ogTitle": "[Crossover] Suicidal Tendencies - You Can't Bring Me Down",
-        "parsable": true,
+        "valid": true,
         "artist": "Suicidal Tendencies",
         "track": "You Can't Bring Me Down"
     },
     {
         "ogTitle": "Stratovarius - Hunting High & Low",
-        "parsable": true,
+        "valid": true,
         "artist": "Stratovarius",
         "track": "Hunting High & Low"
     },
     {
         "ogTitle": "Dying Fetus - From Womb to Waste",
-        "parsable": true,
+        "valid": true,
         "artist": "Dying Fetus",
         "track": "From Womb to Waste"
     },
     {
         "ogTitle": "[Heavy] Visigoth - Conqueror's Oath - New album full stream",
-        "parsable": true,
+        "valid": true,
         "artist": "Visigoth",
         "track": "Conqueror's Oath"
     },
     {
         "ogTitle": "Isis - Hive Destruction [Sludge]",
-        "parsable": true,
+        "valid": true,
         "artist": "Isis",
         "track": "Hive Destruction"
     },
     {
         "ogTitle": "Dissection - Nights Blood",
-        "parsable": true,
+        "valid": true,
         "artist": "Dissection",
         "track": "Nights Blood"
     },
     {
         "ogTitle": "Ozzy Osbourne Announces Retirement",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "[Progressive Deathgrind] Cattle Decapitation- Manufactured Extinct",
-        "parsable": true,
+        "valid": true,
         "artist": "Cattle Decapitation",
         "track": "Manufactured Extinct"
     },
     {
         "ogTitle": "Deicide - Repent to Die",
-        "parsable": true,
+        "valid": true,
         "artist": "Deicide",
         "track": "Repent to Die"
     },
     {
         "ogTitle": "Visigoth - \"Traitor's Gate\" (2018, US) [FFO: Eternal Champion, Cirith Ungol]",
-        "parsable": true,
+        "valid": true,
         "artist": "Visigoth",
         "track": "Traitor's Gate"
     },
     {
         "ogTitle": "[NEW] Gatecreeper - Dead Inside",
-        "parsable": true,
+        "valid": true,
         "artist": "Gatecreeper",
         "track": "Dead Inside"
     },
     {
         "ogTitle": "Lemmy from Motörhead Is Risen on a St. Louis Billboard",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Shreddit's Official Metal Valentine's Thread <3",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Goatwhore - Baring Teeth for Revolt",
-        "parsable": true,
+        "valid": true,
         "artist": "Goatwhore",
         "track": "Baring Teeth for Revolt"
     },
     {
         "ogTitle": "WITCH VOMIT - Screams from Purgatory [Portland, 2016] (FFO: Vastum, Autopsy, Abhorrence)",
-        "parsable": true,
+        "valid": true,
         "artist": "WITCH VOMIT",
         "track": "Screams from Purgatory"
     },
     {
         "ogTitle": "Nunslaughter - Satanic Slut",
-        "parsable": true,
+        "valid": true,
         "artist": "Nunslaughter",
         "track": "Satanic Slut"
     },
     {
         "ogTitle": "Annihilator - Burns Like a Buzzsaw Blade",
-        "parsable": true,
+        "valid": true,
         "artist": "Annihilator",
         "track": "Burns Like a Buzzsaw Blade"
     },
     {
         "ogTitle": "Wolves In The Throne Room - Thuja Magus Imperium",
-        "parsable": true,
+        "valid": true,
         "artist": "Wolves In The Throne Room",
         "track": "Thuja Magus Imperium"
     },
     {
         "ogTitle": "Cirith Ungol - War Eternal (US, 1986, FFO: Manilla Road, Slough Feg)",
-        "parsable": true,
+        "valid": true,
         "artist": "Cirith Ungol",
         "track": "War Eternal"
     },
     {
         "ogTitle": "[Folk, Prog, Power] Lör - In Forgotten Sleep (2017)",
-        "parsable": true,
+        "valid": true,
         "artist": "Lör",
         "track": "In Forgotten Sleep"
     },
     {
         "ogTitle": "X Japan - Silent Jealousy [Japan, 1991]",
-        "parsable": true,
+        "valid": true,
         "artist": "X Japan",
         "track": "Silent Jealousy"
     },
     {
         "ogTitle": "Speedwolf - Hell And Back [USA, 2011. FFO: Speed, Wolves]",
-        "parsable": true,
+        "valid": true,
         "artist": "Speedwolf",
         "track": "Hell And Back"
     },
     {
         "ogTitle": "Archgoat - Whore of Bethlehem",
-        "parsable": true,
+        "valid": true,
         "artist": "Archgoat",
         "track": "Whore of Bethlehem"
     },
     {
         "ogTitle": "Carnivore- Predator",
-        "parsable": true,
+        "valid": true,
         "artist": "Carnivore",
         "track": "Predator"
     },
     {
-        "ogTitle": "Drudkh - U Dakhiv Irzhavim Kolossyu [new parsable]",
-        "parsable": true,
+        "ogTitle": "Drudkh - U Dakhiv Irzhavim Kolossyu [new song]",
+        "valid": true,
         "artist": "Drudkh",
         "track": "U Dakhiv Irzhavim Kolossyu"
     },
     {
         "ogTitle": "Messa - Hour of the Wolf",
-        "parsable": true,
+        "valid": true,
         "artist": "Messa",
         "track": "Hour of the Wolf"
     },
     {
         "ogTitle": "Slaughter Lord - Destructor [Australia, 1987] (FFO: 1st wave, Bathory, Sodom)",
-        "parsable": true,
+        "valid": true,
         "artist": "Slaughter Lord",
         "track": "Destructor"
     },
     {
         "ogTitle": "[Atmospheric Black] - Mare Cognitum - Entropic Hallucinations",
-        "parsable": true,
+        "valid": true,
         "artist": "Mare Cognitum",
         "track": "Entropic Hallucinations"
     },
     {
         "ogTitle": "[REC CENTER] Shreddit's Official Recommendation Thread [2/14]",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Martröð - Draumleysa (2016 | FFO: Aosoth, Deathspell Omega, Misþyrming, Orthodox BM supergroup)",
-        "parsable": true,
+        "valid": true,
         "artist": "Martröð",
         "track": "Draumleysa"
     },
     {
         "ogTitle": "Torsofuck - Raped By Elephants",
-        "parsable": true,
+        "valid": true,
         "artist": "Torsofuck",
         "track": "Raped By Elephants"
     },
     {
         "ogTitle": "The Ocean new album in Sep 2018(second one in 2019)",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Shreddit's General Metal Discussion",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "At the Gates - The Swarm",
-        "parsable": true,
+        "valid": true,
         "artist": "At the Gates",
         "track": "The Swarm"
     },
     {
         "ogTitle": "Shreddit's Album of the Week: Nocturnal Rites - Tales Of Mystery And Imagination (1998) -- 20th Anniversary",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Perverted Ceremony - Dark Necromancy [Belgium, 2017] (FFO: Beherit, Ride for Revenge, Demoncy)",
-        "parsable": true,
+        "valid": true,
         "artist": "Perverted Ceremony",
         "track": "Dark Necromancy"
     },
     {
         "ogTitle": "Shreddit's \"Off-Topic\" Discussion",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Webcast of Cliff Burton Day celebration",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Savatage- \"Holocaust\" (from 1983 debut Sirens)",
-        "parsable": true,
+        "valid": true,
         "artist": "Savatage",
         "track": "Holocaust"
     },
     {
         "ogTitle": "[PROMOTE] Tell Us About Your Band, Blog, or Services!",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Cerebral Effusion - Into Morbid Obesity",
-        "parsable": true,
+        "valid": true,
         "artist": "Cerebral Effusion",
         "track": "Into Morbid Obesity"
     },
     {
         "ogTitle": "[Black] Summoning - Farewell",
-        "parsable": true,
+        "valid": true,
         "artist": "Summoning",
         "track": "Farewell"
     },
     {
         "ogTitle": "The Ruins Of Beverast - Kain's Countenance Fell [Germany, 2009]",
-        "parsable": true,
+        "valid": true,
         "artist": "The Ruins Of Beverast",
         "track": "Kain's Countenance Fell"
     },
     {
         "ogTitle": "[FRESH METAL]#51 The Atlas Moth, Visigoth, Gnaw Their Tongues, Rivers of Nihil, Therion",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Forteresse - Profonde Liberté À Nos Cœurs",
-        "parsable": true,
+        "valid": true,
         "artist": "Forteresse",
         "track": "Profonde Liberté À Nos Cœurs"
     },
     {
         "ogTitle": "Sargeist - Cursed Blaze of Rituals [Finland, 2005]",
-        "parsable": true,
+        "valid": true,
         "artist": "Sargeist",
         "track": "Cursed Blaze of Rituals"
     },
     {
         "ogTitle": "Infester - A Higher Art of Immutable Beauty (USA, 1994)",
-        "parsable": true,
+        "valid": true,
         "artist": "Infester",
         "track": "A Higher Art of Immutable Beauty"
     },
     {
         "ogTitle": "[Death] Deceased - Destiny",
-        "parsable": true,
+        "valid": true,
         "artist": "Deceased",
         "track": "Destiny"
     },
     {
         "ogTitle": "Exodus - Deranged",
-        "parsable": true,
+        "valid": true,
         "artist": "Exodus",
         "track": "Deranged"
     },
     {
         "ogTitle": "Varathron - Ouroboros Dweller (The Dweller of Barathrum) [Greece, 2018] (FFO: Rotting Christ, Thou Art Lord, Hellas)",
-        "parsable": true,
+        "valid": true,
         "artist": "Varathron",
         "track": "Ouroboros Dweller"
     },
     {
         "ogTitle": "Falkenbach - Bluot Fuër Bluot",
-        "parsable": true,
+        "valid": true,
         "artist": "Falkenbach",
         "track": "Bluot Fuër Bluot"
     },
     {
         "ogTitle": "[Black] Satanic Warmaster - Black Destiny",
-        "parsable": true,
+        "valid": true,
         "artist": "Satanic Warmaster",
         "track": "Black Destiny"
     },
     {
         "ogTitle": "Evilfeast - Lunar Rites... Beholding the Towers of Barad-Dur",
-        "parsable": true,
+        "valid": true,
         "artist": "Evilfeast",
         "track": "Lunar Rites... Beholding the Towers of Barad-Dur"
     },
     {
         "ogTitle": "[Thrash] Nuclear Assault - Cold Steel",
-        "parsable": true,
+        "valid": true,
         "artist": "Nuclear Assault",
         "track": "Cold Steel"
     },
     {
         "ogTitle": "2018 Sleep tour date additions",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Ария - Что вы сделали с вашей мечтой?",
-        "parsable": true,
+        "valid": true,
         "artist": "Ария",
         "track": "Что вы сделали с вашей мечтой?"
     },
     {
         "ogTitle": "Unaussprechlichen Kulten - The Mark Of The Devil [Chile, 2017] [FFO: Immolation, top 3 dm last year]",
-        "parsable": true,
+        "valid": true,
         "artist": "Unaussprechlichen Kulten",
         "track": "The Mark Of The Devil"
     },
     {
         "ogTitle": "FULL OF HELL: Sign To Relapse Records",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Enslaved - What Else Is There",
-        "parsable": true,
+        "valid": true,
         "artist": "Enslaved",
         "track": "What Else Is There"
     },
     {
         "ogTitle": "[TOUR] Amorphis, Dark Tranquillity, Moonspell, and Omnium Gatherum - North America",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Ascended Dead - The Promised Time (FFO: Morbid Angel, Immolation, Revenge)",
-        "parsable": true,
+        "valid": true,
         "artist": "Ascended Dead",
         "track": "The Promised Time"
     },
     {
         "ogTitle": "Kawir- Agamemnon [FFO: Macabre Omen, Bathory, great melodies, pinch harmonics]",
-        "parsable": true,
+        "valid": true,
         "artist": "Kawir",
         "track": "Agamemnon"
     },
     {
         "ogTitle": "[Speed] ADX - L'etranger",
-        "parsable": true,
+        "valid": true,
         "artist": "ADX",
         "track": "L'etranger"
     },
     {
         "ogTitle": "Some Days Are for Dying",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Vendetta Records having a 20% off sale, both digital and physical, use code 'discount' (Incl. Ash Borer, Thou, Void Omnia)",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "Gammacide - Walking Plague",
-        "parsable": true,
+        "valid": true,
         "artist": "Gammacide",
         "track": "Walking Plague"
     },
     {
         "ogTitle": "Cloak - In the Darkness, The Path [FFO: Tribulation]",
-        "parsable": true,
+        "valid": true,
         "artist": "Cloak",
         "track": "In the Darkness, The Path"
     },
     {
         "ogTitle": "[INDUSTRIAL] Iperyt- Particular Hatred",
-        "parsable": true,
+        "valid": true,
         "artist": "Iperyt",
         "track": "Particular Hatred"
     },
     {
         "ogTitle": "Beyond Death - A Slice Of Death (1987)",
-        "parsable": true,
+        "valid": true,
         "artist": "Beyond Death",
         "track": "A Slice Of Death"
     },
     {
         "ogTitle": "Argus - Infinite Lives Infinite Doors [Pennsylvania, 2017]",
-        "parsable": true,
+        "valid": true,
         "artist": "Argus",
         "track": "Infinite Lives Infinite Doors"
     },
     {
         "ogTitle": "Apokalyptic Raids - Angels of Hell",
-        "parsable": true,
+        "valid": true,
         "artist": "Apokalyptic Raids",
         "track": "Angels of Hell"
     },
     {
         "ogTitle": "The Furor - Formes Peccati (Australia, 2017) [FFO: tight riffs, excellent musicianship, great recs from AveLucifer]",
-        "parsable": true,
+        "valid": true,
         "artist": "The Furor",
         "track": "Formes Peccati"
     },
     {
         "ogTitle": "Helloween - Eagle Fly Free",
-        "parsable": true,
+        "valid": true,
         "artist": "Helloween",
         "track": "Eagle Fly Free"
     },
     {
         "ogTitle": "Cobalt - Two-Thumbed Fist",
-        "parsable": true,
+        "valid": true,
         "artist": "Cobalt",
         "track": "Two-Thumbed Fist"
     },
     {
         "ogTitle": "[Black/Death] Teitanblood - Domains of Darkness and Ancient Evil",
-        "parsable": true,
+        "valid": true,
         "artist": "Teitanblood",
         "track": "Domains of Darkness and Ancient Evil"
     },
     {
         "ogTitle": "Saint Vitus - H.A.A.G.",
-        "parsable": true,
+        "valid": true,
         "artist": "Saint Vitus",
         "track": "H.A.A.G."
     },
     {
         "ogTitle": "Falls of Rauros - The Purity of Isolation [US black metal, 2014. FFO: Panopticon, Agalloch, Saor]",
-        "parsable": true,
+        "valid": true,
         "artist": "Falls of Rauros",
         "track": "The Purity of Isolation"
     },
     {
         "ogTitle": "[Death/Grind] Unholy Grave - Mental Disease",
-        "parsable": true,
+        "valid": true,
         "artist": "Unholy Grave",
         "track": "Mental Disease"
     },
     {
         "ogTitle": "Helloween - Starlight (Michael Kiske version)",
-        "parsable": true,
+        "valid": true,
         "artist": "Helloween",
         "track": "Starlight"
     },
     {
         "ogTitle": "Olfaction - Tomb of Horrors [US, Death / Goregrind] (2018) -- FFO Slime, Coffin Dust",
-        "parsable": true,
+        "valid": true,
         "artist": "Olfaction",
         "track": "Tomb of Horrors"
     },
     {
         "ogTitle": "Prosanctus Inferi - Apex Jaws In Madrigal Posture (USA, 2003) [FFO: Profanatica, Order From Chaos, Angelcorpse, Paolo Girardi artwork]",
-        "parsable": true,
+        "valid": true,
         "artist": "Prosanctus Inferi",
         "track": "Apex Jaws In Madrigal Posture"
     },
     {
         "ogTitle": "Sarcófago - Tracy",
-        "parsable": true,
+        "valid": true,
         "artist": "Sarcófago",
         "track": "Tracy"
     },
     {
         "ogTitle": "Bastardhammer - Poser Disposer [UK || Death/Crust || 2013 || FFO: Tuff, crusty as fuck death metal]",
-        "parsable": true,
+        "valid": true,
         "artist": "Bastardhammer",
         "track": "Poser Disposer"
     },
     {
         "ogTitle": "Flotsam and Jetsam - No Place For Disgrace",
-        "parsable": true,
+        "valid": true,
         "artist": "Flotsam and Jetsam",
         "track": "No Place For Disgrace"
     },
     {
         "ogTitle": "Another 2017 list-of-lists article, but with genre and label data!",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     },
     {
         "ogTitle": "The Body - \"Nothing Stirs\" [USA, 2018]",
-        "parsable": true,
+        "valid": true,
         "artist": "The Body",
         "track": "Nothing Stirs"
     },
     {
         "ogTitle": "Spinebreaker - Divine Mortal Being [FFO: Entombed, Swedeath, HM-2]",
-        "parsable": true,
+        "valid": true,
         "artist": "Spinebreaker",
         "track": "Divine Mortal Being"
     },
     {
         "ogTitle": "Thy Catafalque - Szamojéd freskó",
-        "parsable": true,
+        "valid": true,
         "artist": "Thy Catafalque",
         "track": "Szamojéd freskó"
     },
     {
         "ogTitle": "Taake - Det fins en prins",
-        "parsable": true,
+        "valid": true,
         "artist": "Taake",
         "track": "Det fins en prins"
     },
     {
         "ogTitle": "Wolf - \"In the Shadow of Steel\" [Sweden, 1999]",
-        "parsable": true,
+        "valid": true,
         "artist": "Wolf",
         "track": "In the Shadow of Steel"
     },
     {
         "ogTitle": "Ufomammut - Stigma [2008]",
-        "parsable": true,
+        "valid": true,
         "artist": "Ufomammut",
         "track": "Stigma"
     },
     {
         "ogTitle": "「ＰＯＷＥＲ」Jin Hashimoto - Stand Proud {FFO: ゴゴゴゴ Dio ゴゴゴゴ, Hammerfall, Helloween}",
-        "parsable": false,
+        "valid": false,
         "artist": "Jin Hashimoto",
         "track": "Stand Proud"
     },
     {
         "ogTitle": "[Death/Doom] Hooded Menace - Blood For The Burning Oath / Dungeons Of The Disembodied (Finland, 2015)",
-        "parsable": true,
+        "valid": true,
         "artist": "Hooded Menace",
         "track": "Blood For The Burning Oath / Dungeons Of The Disembodied"
     },
     {
         "ogTitle": "Savage Master - Vengeance Is Steel (USA, 2016)",
-        "parsable": true,
+        "valid": true,
         "artist": "Savage Master",
         "track": "Vengeance Is Steel"
     },
     {
         "ogTitle": "Leviathan/Crawl split release",
-        "parsable": false,
+        "valid": false,
         "artist": null,
         "track": null
     }

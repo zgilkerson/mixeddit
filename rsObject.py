@@ -1,14 +1,14 @@
 import re
 
 pattern = re.compile(
-    r"^(?P<genre>\[.*\])?[ -]*(?P<artist>.+?(?=( -| - |- )))-(?P<track>.+?(?=( -| - |- |\(|\[|\n|$)))(?P<misc>[-\(\[].*)?")
+    r"^(?P<genre>\[.*\])?[ -]*(?P<artist>.+?(?=( -| - |- )))-(?P<track>.+?(?=( -| - |- |\(|\[|\n|$)))(?P<misc>[-\(\[].*)?$")
 
 
 
 class rsObject:
     def __init__(self, ogTitle):
         self.ogTitle = ogTitle
-        self.parsable = False
+        self.valid = False
         self.artist = None
         self.track = None
         self.parseRedditTitle()
@@ -17,7 +17,7 @@ class rsObject:
         if "-" not in self.ogTitle or "Shreddit" in self.ogTitle or "「" in self.ogTitle or "[TOUR]" in self.ogTitle:
             return
         else:   
-            self.parsable = True
+            self.valid = True
             parsedTitle = pattern.match(self.ogTitle)
             if parsedTitle is not None:
                 self.artist = parsedTitle.group('artist').strip(' \"')
