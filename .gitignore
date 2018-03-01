@@ -1,4 +1,5 @@
 # Project Based Ignore
+.vscode/
 *.ini
 
 # Generic Python Ignore from Github
