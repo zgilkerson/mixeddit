@@ -3,39 +3,64 @@ import json
 import requests
 from requests_oauthlib import OAuth2Session
 
-# class spooter:
-config = configparser.ConfigParser()
-configFile = 'config.ini'
-config.read(configFile)
-client_id = config['spotify']['client_id']
-client_secret = config['spotify']['client_secret']
-token = json.loads(config['spotify']['token'])
-scope = 'user-read-private playlist-read-private playlist-modify-private'
-redirect_uri='https://localhost:666' # DOOM! should switch this over once a front-end is made...if ever
-response_type='code'
-spotifyUrlAuthBase = 'https://accounts.spotify.com/api/'
+class spooter:
+    """ Spotify class, reminds me of the scary Spooders """
+    def __init__(self):
+        self.config = configparser.ConfigParser()
+        self.configFile = 'config.ini'
+        self.config.read(self.configFile)
+        client_id = self.config['spotify']['client_id']
+        client_secret = self.config['spotify']['client_secret']
+        token = json.loads(self.config['spotify']['token'])
+        spotifyUrlAuthBase = 'https://accounts.spotify.com/api/token'
+        extra = {'client_id': client_id,'client_secret': client_secret}
+        self.client = OAuth2Session(client_id=client_id,token=token,
+                                    auto_refresh_url=spotifyUrlAuthBase,
+                                    auto_refresh_kwargs=extra,token_updater=self.save_token)
+        self.spotifyBaseUrl = 'https://api.spotify.com/v1/'
 
-extra = {
-    'client_id': client_id,
-    'client_secret': client_secret,
-}
+    def save_token(self, newToken):
+        """ Write the new token to config file """
+        self.config['spotify']['token'] = json.dumps(newToken)
+        with open(self.configFile, 'w') as cf:
+            self.config.write(cf)
+    
+    def get_all_playlists(self):
+        """ Returns a list of all playlists that belong to the current user """
+        playlists_url = self.spotifyBaseUrl+'me/playlists'
+        return self.client.get(playlists_url).json()
 
-def save_token(newToken):
-    config['spotify']['token'] = json.dumps(newToken)
-    # token = newToken
-    with open(configFile, 'w') as cf:
-        config.write(cf)
+    def get_playlist_id(self, targetPlaylistName):
+        """ Get id of Spotify Playlist """
+        all_playlists = self.get_all_playlists()
+        for playlist in all_playlists['items']:
+            if(playlist['name'] == targetPlaylistName):
+                return playlist['id']
 
-client = OAuth2Session(client_id=client_id,
-                        token=token,
-                        auto_refresh_url=spotifyUrlAuthBase+'token',
-                        auto_refresh_kwargs=extra,
-                        token_updater=save_token)
-playlists_url = 'https://api.spotify.com/v1/me/playlists'
-print(client.get(playlists_url).json())
+    def get_current_user_id(self):
+        """ Get the id of the current user """
+        user_info = self.client.get(self.spotifyBaseUrl+'me').json()
+        return user_info['uri'].split('spotify:user:', 1)[1]
+
+    def search(self, query, queryType):
+        """ Search Spotify for something """
+        search_url = self.spotifyBaseUrl+'search'
+        payload = {'q': query, 'type': queryType}
+        searchResults = self.client.get(search_url, params=payload).json()
+        return searchResults
+
+    def replace_playlist(self, user_id, playlist_id, track_list):
+        replace_url = 'https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks'.format(user_id=user_id,               playlist_id=playlist_id)
+        payload = { "uris" : track_list }
+        response = self.client.put(replace_url, json=payload)
+        print(response.json())
 
 # I used the following for the inital authorization of this app
 
+# scope = 'user-read-private playlist-read-private playlist-modify-private'
+# DOOM! should switch this over once a front-end is made...if ever
+# redirect_uri = 'https://localhost:666'
+# response_type = 'code'
 # oauth = OAuth2Session(client_id=client_id,
 #                       redirect_uri=redirect_uri,
 #                       scope=scope)
