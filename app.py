@@ -28,9 +28,7 @@ def redditGetTitles(subreddit='metal', timePeriod='week', limit=100):
 def spotifyUpdatePlaylist(rsObjects, playlistName='TopOfShreddit'):
     spotify = spooter()
     playlistID = spotify.playlistGetId(playlistName)
-    print(playlistID)
     userID = spotify.currentUserGetId()
-    print(userID)
     spotifyTrackURIList = []
     for redditTrack in rsObjects:
         searchResults = spotify.search(redditTrack.track, 'track')
@@ -44,7 +42,6 @@ def spotifyUpdatePlaylist(rsObjects, playlistName='TopOfShreddit'):
             print(json.dumps(searchResults))
             print('attempted to find track {}'.format(redditTrack.track))
             print('=============================')
-    print('found {} tracks on spotify'.format(len(spotifyTrackURIList)))
     spotify.playlistReplace(userID, playlistID, spotifyTrackURIList) 
 
 if __name__ == '__main__':

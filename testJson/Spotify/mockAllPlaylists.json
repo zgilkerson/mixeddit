@@ -1,0 +1,64 @@
+{
+    "href": "https://api.spotify.com/v1/users/zgilkerson/playlists",
+    "items": [
+        {
+            "collaborative": false,
+            "external_urls": {
+                "spotify": "http://open.spotify.com/user/zgilkerson/playlists/53Y8wT46QIMz5H4WQ8O22c"
+            },
+            "href": "https://api.spotify.com/v1/users/zgilkerson/playlists/53Y8wT46QIMz5H4WQ8O22c",
+            "id": "53Y8wT46QIMz5H4WQ8O22c",
+            "images": [],
+            "name": "TopOfShreddit",
+            "owner": {
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/zgilkerson"
+                },
+                "href": "https://api.spotify.com/v1/users/zgilkerson",
+                "id": "zgilkerson",
+                "type": "user",
+                "uri": "spotify:user:zgilkerson"
+            },
+            "public": false,
+            "snapshot_id": "bNLWdmhh+HDsbHzhckXeDC0uyKyg4FjPI/KEsKjAE526usnz2LxwgyBoMShVL+z+",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/users/zgilkerson/playlists/53Y8wT46QIMz5H4WQ8O22c/tracks",
+                "total": 30
+            },
+            "type": "playlist",
+            "uri": "spotify:user:zgilkerson:playlist:53Y8wT46QIMz5H4WQ8O22c"
+        },
+        {
+            "collaborative": true,
+            "external_urls": {
+                "spotify": "http://open.spotify.com/user/wolfier/playlists/1AVZz0mBuGbCEoNRQdYQju"
+            },
+            "href": "https://api.spotify.com/v1/users/wolfier/playlists/1AVZz0mBuGbCEoNRQdYQju",
+            "id": "1AVZz0mBuGbCEoNRQdYQju",
+            "images": [],
+            "name": "Wolfier's wolfing about",
+            "owner": {
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/wolfier"
+                },
+                "href": "https://api.spotify.com/v1/users/wolfier",
+                "id": "wolfier",
+                "type": "user",
+                "uri": "spotify:user:wolfier"
+            },
+            "public": true,
+            "snapshot_id": "Y0qg/IT5T02DKpw4uQKc/9RUrqQJ07hbTKyEeDRPOo9LU0g0icBrIXwVkHfQZ/aD",
+            "tracks": {
+                "href": "https://api.spotify.com/v1/users/wolfier/playlists/1AVZz0mBuGbCEoNRQdYQju/tracks",
+                "total": 58
+            },
+            "type": "playlist",
+            "uri": "spotify:user:wolfier:playlist:1AVZz0mBuGbCEoNRQdYQju"
+        }
+    ],
+    "limit": 2,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 2
+}

@@ -25,24 +25,23 @@ class spooter:
         with open(self.configFile, 'w') as cf:
             self.config.write(cf)
     
-    def playlistGetAll(self):
+    def playlistGetAllForCurrentUser(self):
         """ Returns a list of all playlists that belong to the current user """
         playlists_url = self.spotifyBaseUrl+'me/playlists'
         return self.client.get(playlists_url).json()
 
-    def playlistReplace(self, user_id, playlist_id, track_list):
-        """ Replace the given playlist with the list of provided tracks """
-        replace_url = 'https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks'.format(user_id=user_id,               playlist_id=playlist_id)
-        payload = { "uris" : track_list }
-        response = self.client.put(replace_url, json=payload)
-        print(response.json())
-
     def playlistGetId(self, targetPlaylistName):
         """ Get the id of a Spotify Playlist """
-        all_playlists = self.playlistGetAll()
+        all_playlists = self.playlistGetAllForCurrentUser()
         for playlist in all_playlists['items']:
             if(playlist['name'] == targetPlaylistName):
                 return playlist['id']
+
+    def playlistReplace(self, user_id, playlist_id, track_list):
+        """ Replace the given playlist with the list of provided tracks """
+        replace_url = 'https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks'.format(user_id=user_id, playlist_id=playlist_id)
+        payload = { "uris" : track_list }
+        self.client.put(replace_url, json=payload)
 
     def currentUserGetId(self):
         """ Get the id of the current user """
@@ -55,30 +54,3 @@ class spooter:
         payload = {'q': query, 'type': queryType}
         searchResults = self.client.get(search_url, params=payload).json()
         return searchResults
-
-    def mocking(self):
-        response = self.client.get(self.spotifyBaseUrl)
-        if response.ok:
-            return response
-        else:
-            return None
-
-# I used the following for the inital authorization of this app
-
-# scope = 'user-read-private playlist-read-private playlist-modify-private'
-# DOOM! should switch this over once a front-end is made...if ever
-# redirect_uri = 'https://localhost:666'
-# response_type = 'code'
-# oauth = OAuth2Session(client_id=client_id,
-#                       redirect_uri=redirect_uri,
-#                       scope=scope)
-#     authorization_url, state = oauth.authorization_url(
-#         spotifyUrlAuthBase+'/authorize')
-#     print(authorization_url)
-#     authorization_response = input('Enter the full callback URL')
-#     token = oauth.fetch_token(spotifyUrlAuthBase+'/api/token',
-#                               authorization_response=authorization_response,
-#                               client_secret=client_secret)
-#     config['spotify']['token'] = json.dumps(token)
-#     with open(configFile, 'w') as cf:
-#             config.write(cf)

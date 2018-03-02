@@ -1,6 +1,7 @@
 # Project Based Ignore
 .vscode/
 *.ini
+*.code-workspace
 
 # Generic Python Ignore from Github
 # Byte-compiled / optimized / DLL files
