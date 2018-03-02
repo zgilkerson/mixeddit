@@ -2,7 +2,7 @@ import json
 from rsObject import rsObject
 import unittest
 
-class TestrsObject(unittest.TestCase):
+class test_rsObject(unittest.TestCase):
 
     def test_titleParsing(self):
         with open('testCases.json', 'r') as testJson:

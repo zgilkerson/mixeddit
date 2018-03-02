@@ -3,14 +3,17 @@ import json
 from rsObject import rsObject
 from spooter import spooter
 
-# reddit = praw.Reddit('shreddit2spotify')
-
 def main():
+    rsObjects = redditGetTitles()
+    spotifyUpdatePlaylist(rsObjects)
+
+def redditGetTitles(subreddit='metal', timePeriod='week', limit=100):
+    # reddit = praw.Reddit('shreddit2spotify')
     # print('Running in read only mode?')
     # if reddit.read_only is not True:
         # exit()
     rsObjects = []
-    # for submission in reddit.subreddit('metal').top('week', limit=100):
+    # for submission in reddit.subreddit(subreddit).top(timePeriod, limit=100):
     #     parsedTitle = rsObject(submission.title)
     #     if parsedTitle.valid:
     #         rsObjects.append(parsedTitle)
@@ -20,14 +23,15 @@ def main():
             parsedTitle = rsObject(loadedJson[i]['ogTitle'])
             if parsedTitle.valid:
                 rsObjects.append(parsedTitle)
+    return rsObjects
 
+def spotifyUpdatePlaylist(rsObjects, playlistName='TopOfShreddit'):
     spotify = spooter()
-    playlistID = spotify.get_playlist_id("TopOfShreddit")
+    playlistID = spotify.playlistGetId(playlistName)
     print(playlistID)
-    userID = spotify.get_current_user_id()
+    userID = spotify.currentUserGetId()
     print(userID)
     spotifyTrackURIList = []
-    # print(searchResults)
     for redditTrack in rsObjects:
         searchResults = spotify.search(redditTrack.track, 'track')
         try:
@@ -36,13 +40,12 @@ def main():
                     spotifyTrackURIList.append(spotifyTrack['uri'])
                     break
         except KeyError:
-            print("=============================")
+            print('=============================')
             print(json.dumps(searchResults))
-            print("attempted to find track {}".format(redditTrack.track))
-            print("=============================")
-    print("found {} tracks on spotify".format(len(spotifyTrackURIList)))
-    spotify.replace_playlist(userID, playlistID, spotifyTrackURIList)
-        
+            print('attempted to find track {}'.format(redditTrack.track))
+            print('=============================')
+    print('found {} tracks on spotify'.format(len(spotifyTrackURIList)))
+    spotify.playlistReplace(userID, playlistID, spotifyTrackURIList) 
 
 if __name__ == '__main__':
     main()
