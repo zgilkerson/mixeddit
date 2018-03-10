@@ -1,19 +1,23 @@
 import json
-from rsObject import rsObject
+from reddit_spotify_object import RedditSpotifyObject
 import unittest
 
-class test_rsObject(unittest.TestCase):
 
-    def test_titleParsing(self):
-        with open('testCases.json', 'r') as testJson:
-            loadedJson = json.load(testJson)
-            for i in range(0, len(loadedJson)):
-                with self.subTest(i=loadedJson[i]):
-                    rso = rsObject(loadedJson[i]["ogTitle"])
-                    self.assertEqual(rso.ogTitle, loadedJson[i]["ogTitle"])
-                    if(loadedJson[i]["valid"]):
-                        self.assertEqual(rso.artist, loadedJson[i]["artist"])
-                        self.assertEqual(rso.track, loadedJson[i]["track"])
+class Test_RedditSpotifyObject(unittest.TestCase):
+
+    def test_title_parsing(self):
+        with open('testJson/Reddit/parseRedditTitle.json', 'r') as json_file:
+            test_json = json.load(json_file)
+            for submission in range(0, len(test_json)):
+                with self.subTest(submission=test_json[submission]):
+                    rso = RedditSpotifyObject(test_json[submission]["ogTitle"])
+                    self.assertEqual(rso.reddit_title,
+                                     test_json[submission]["ogTitle"])
+                    if(test_json[submission]["valid"]):
+                        self.assertEqual(rso.artist,
+                                         test_json[submission]["artist"])
+                        self.assertEqual(rso.track,
+                                         test_json[submission]["track"])
                     else:
                         self.assertIsNone(rso.artist)
                         self.assertIsNone(rso.track)
