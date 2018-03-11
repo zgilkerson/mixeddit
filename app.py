@@ -19,7 +19,7 @@ def reddit_get_titles(subreddit='metal', time_period='week', limit=100):
     #     parsedTitle = rsObject(submission.title)
     #     if parsedTitle.valid:
     #         rsObjects.append(parsedTitle)
-    with open('testCases.json', 'r') as json_file:
+    with open('testJson/Reddit/parseRedditTitle.json', 'r') as json_file:
         test_json = json.load(json_file)
         for submission in range(0, len(test_json)):
             parsed_title = RedditSpotifyObject(test_json[submission]

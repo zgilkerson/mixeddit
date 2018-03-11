@@ -8,13 +8,15 @@ BASE_URL = 'https://api.spotify.com/v1/'
 class Spotify:
     """Class for interacting with the Spotify API."""
 
-    def __init__(self):
+    def __init__(self, spotify_config_file='spotify.ini',
+                 spotify_section_title='spotify'):
         self.config = configparser.ConfigParser()
-        self.config_file = 'config.ini'
+        self.config_file = spotify_config_file
         self.config.read(self.config_file)
-        client_id = self.config['spotify']['client_id']
-        client_secret = self.config['spotify']['client_secret']
-        token = json.loads(self.config['spotify']['token'])
+        self.config_section = spotify_section_title
+        client_id = self.config[self.config_section]['client_id']
+        client_secret = self.config[self.config_section]['client_secret']
+        token = json.loads(self.config[self.config_section]['token'])
         spotify_auth_url = 'https://accounts.spotify.com/api/token'
         extra = {'client_id': client_id, 'client_secret': client_secret}
         self.client = OAuth2Session(client_id=client_id, token=token,
@@ -25,7 +27,7 @@ class Spotify:
     def save_token(self, new_token):
         """Writes the new token to the config file."""
 
-        self.config['spotify']['token'] = json.dumps(new_token)
+        self.config[self.config_section]['token'] = json.dumps(new_token)
         with open(self.config_file, 'w') as cf:
             self.config.write(cf)
 
