@@ -1,6 +1,8 @@
 import configparser
 import json
 from requests_oauthlib import OAuth2Session
+from spotify_error import SpotifySetUpError
+
 
 BASE_URL = 'https://api.spotify.com/v1/'
 
@@ -10,14 +12,17 @@ class Spotify:
 
     def __init__(self, spotify_config_file='spotify.ini',
                  spotify_section_title='spotify'):
+        spotify_auth_url = 'https://accounts.spotify.com/api/token'
         self.config = configparser.ConfigParser()
         self.config_file = spotify_config_file
-        self.config.read(self.config_file)
         self.config_section = spotify_section_title
+        # try:
+        self.config.read(self.config_file)
         client_id = self.config[self.config_section]['client_id']
         client_secret = self.config[self.config_section]['client_secret']
         token = json.loads(self.config[self.config_section]['token'])
-        spotify_auth_url = 'https://accounts.spotify.com/api/token'
+        # except (TypeError, KeyError) as e:
+        #   raise SpotifySetUpError(e)
         extra = {'client_id': client_id, 'client_secret': client_secret}
         self.client = OAuth2Session(client_id=client_id, token=token,
                                     auto_refresh_url=spotify_auth_url,
