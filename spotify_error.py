@@ -1,6 +1,5 @@
 class SpotifyError(Exception):
     """Base Class for Spotify.py errors"""
-    pass
 
 
 class SpotifySetUpError(SpotifyError):

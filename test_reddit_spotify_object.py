@@ -6,7 +6,7 @@ import unittest
 class Test_RedditSpotifyObject(unittest.TestCase):
 
     def test_title_parsing(self):
-        with open('testJson/Reddit/parseRedditTitle.json', 'r') as json_file:
+        with open('testFiles/Reddit/parseRedditTitle.json', 'r') as json_file:
             test_json = json.load(json_file)
             for submission in range(0, len(test_json)):
                 with self.subTest(submission=test_json[submission]):
