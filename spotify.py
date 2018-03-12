@@ -23,9 +23,9 @@ class Spotify:
             token = json.loads(self.config[self.config_section]['token'])
         except TypeError as e:
             raise SpotifySetUpError('The configuration file needs to be a '
-                                    'string or file pointer')
+                                    'string or path-like object.')
         except KeyError as e:
-            raise SpotifySetUpError('Could not find key {}'.format(e))
+            raise SpotifySetUpError('Could not find key {}.'.format(e))
         extra = {'client_id': client_id, 'client_secret': client_secret}
         self.client = OAuth2Session(client_id=client_id, token=token,
                                     auto_refresh_url=spotify_auth_url,
@@ -35,7 +35,7 @@ class Spotify:
         try:
             self.client.get(BASE_URL+'me')
         except Exception:
-            raise SpotifySetUpError("There was a problem with authorization")
+            raise SpotifySetUpError("There was a problem with authorization.")
 
     def save_token(self, new_token):
         """Writes the new token to the config file."""

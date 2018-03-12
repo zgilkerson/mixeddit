@@ -1,6 +1,7 @@
 # Project Based Ignore
 .vscode/
 *.ini
+!testFiles/Spotify/testSpotify.ini
 *.code-workspace
 
 # Generic Python Ignore from Github
