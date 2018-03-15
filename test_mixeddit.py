@@ -1,16 +1,16 @@
 import json
-from reddit_spotify_object import RedditSpotifyObject
+from mixeddit import Mixeddit
 import unittest
 
 
-class Test_RedditSpotifyObject(unittest.TestCase):
+class Test_Mixeddit(unittest.TestCase):
 
     def test_title_parsing(self):
         with open('testFiles/Reddit/parseRedditTitle.json', 'r') as json_file:
             test_json = json.load(json_file)
             for submission in range(0, len(test_json)):
                 with self.subTest(submission=test_json[submission]):
-                    rso = RedditSpotifyObject(test_json[submission]["ogTitle"])
+                    rso = Mixeddit(test_json[submission]["ogTitle"])
                     self.assertEqual(rso.reddit_title,
                                      test_json[submission]["ogTitle"])
                     if(test_json[submission]["valid"]):

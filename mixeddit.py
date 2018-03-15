@@ -6,7 +6,7 @@ REDDIT_TITLE_PATTERN = re.compile(
     r"-(?P<track>.+?(?=( -| - |- |\(|\[|\n|$)))(?P<misc>[-\(\[].*)?$")
 
 
-class RedditSpotifyObject:
+class Mixeddit:
     """Object representing Reddit and Spotify information."""
 
     def __init__(self, reddit_title):
