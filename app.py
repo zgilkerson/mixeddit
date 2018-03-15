@@ -10,7 +10,7 @@ def main():
 
 
 def reddit_get_titles(subreddit='metal', time_period='week', limit=100):
-    # reddit = praw.Reddit('shreddit2spotify')
+    # reddit = praw.Reddit('mixeddit')
     # print('Running in read only mode?')
     # if reddit.read_only is not True:
         # exit()
