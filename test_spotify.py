@@ -14,7 +14,7 @@ class MockRequest():
         self.authorized = authorized
         self.http_error_msg = ''
 
-    def get(self, URL):
+    def get(self, url):
         return self.response
 
     def json(self):
@@ -61,6 +61,7 @@ class TestSpotify(unittest.TestCase):
         ini = 1
         with self.assertRaises(SpotifySetUpError) as e:
             Spotify(spotify_config_file=ini)
+        Mock.assert_not_called(mock_oauth)
         self.assertEqual('\'The configuration file needs to be a string or '
                          'path-like object.\'', str(e.exception))
 
@@ -70,6 +71,7 @@ class TestSpotify(unittest.TestCase):
         with self.assertRaises(SpotifySetUpError) as e:
             Spotify(spotify_config_file=ini,
                     spotify_section_title='no_section')
+        Mock.assert_not_called(mock_oauth)
         self.assertEqual('\"Could not find key \'no_section\'.\"',
                          str(e.exception))
 
@@ -90,7 +92,8 @@ class TestSpotify(unittest.TestCase):
             testJson = json.load(oj)
         mock_oauth.return_value = MockRequest(testJson)
         response = self.spotify.playlist_get_all('testUserId')
-        Mock.assert_called_once(mock_oauth)
+        mock_oauth.assert_called_once_with(Spotify.BASE_URL+'users/testUserId/'
+                                           'playlists')
         self.assertEqual(testJson, response)
 
     @patch('spotify.OAuth2Session.get')
@@ -103,17 +106,39 @@ class TestSpotify(unittest.TestCase):
         )
         with self.assertRaises(SpotifyRunTimeError) as e:
             self.spotify.playlist_get_all('testUserId')
-        Mock.assert_called_once(mock_oauth)
+        mock_oauth.assert_called_once_with(Spotify.BASE_URL+'users/testUserId/'
+                                           'playlists')
+        self.assertEqual(400, e.exception.error_code)
+        self.assertEqual('bad request', e.exception.error_message)
         self.assertEqual('Spotify returned with error code: 400, '
                          'bad request', str(e.exception))
 
     @patch('spotify.Spotify.playlist_get_all')
-    def test_playlist_get_id_for_current_user(self, mock_method):
+    def test_playlist_get_id(self, mock_method):
         with open(self.test_files+'allPlaylists.json') as json_file:
             mock_method.return_value = json.load(json_file)
         playlist_id = self.spotify.playlist_get_id(
             'xvtx9jvj0ywnfqpma8tyqr37p', 'TopOfShreddit')
+        mock_method.assert_called_once_with('xvtx9jvj0ywnfqpma8tyqr37p')
         self.assertEqual('53Y8wT46QIMz5H4WQ8O22c', playlist_id)
+
+    @patch('spotify.Spotify.playlist_get_all')
+    def test_playlist_get_id_empty_items(self, mock_method):
+        # with open(self.test_files+'emptyPlaylists.json') as json_file:
+        mock_method.return_value = json.loads('{"items": []}')
+        playlist_id = self.spotify.playlist_get_id(
+            'xvtx9jvj0ywnfqpma8tyqr37p', 'TopOfShreddit')
+        mock_method.assert_called_once_with('xvtx9jvj0ywnfqpma8tyqr37p')
+        self.assertEqual(None, playlist_id)
+
+    @patch('spotify.Spotify.playlist_get_all')
+    def test_playlist_get_id_no_name_match(self, mock_method):
+        with open(self.test_files+'allPlaylists.json') as json_file:
+            mock_method.return_value = json.load(json_file)
+        playlist_id = self.spotify.playlist_get_id(
+            'xvtx9jvj0ywnfqpma8tyqr37p', 'BottomOfShreddit')
+        mock_method.assert_called_once_with('xvtx9jvj0ywnfqpma8tyqr37p')
+        self.assertEqual(None, playlist_id)
 
 if __name__ == '__main__':
     unittest.main()
