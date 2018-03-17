@@ -71,7 +71,11 @@ class Spotify:
                        '{playlist_id}/tracks'])
                        .format(user_id=user_id, playlist_id=playlist_id))
         payload = {"uris": track_list}
-        self.client.put(replace_url, json=payload)
+        response = self.client.put(replace_url, json=payload)
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            raise SpotifyRunTimeError(response.status_code, response.reason)
 
     def user_get_current_user_id(self):
         """Returns the id of the current user."""
