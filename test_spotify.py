@@ -1,10 +1,10 @@
 import configparser
 import json
+import requests
 from spotify import Spotify
 from spotify_error import SpotifyRunTimeError, SpotifySetUpError
 import unittest
 from unittest.mock import Mock, patch
-import urllib3.exceptions
 
 
 class MockRequest():
@@ -21,12 +21,14 @@ class MockRequest():
         return self.response
 
     def raise_for_status_response(self, status_code, reason):
+        self.status_code = status_code
+        self.reason = reason
         self.http_error_msg = u'%s Client Error: %s' % (
             status_code, reason)
 
     def raise_for_status(self):
         if self.http_error_msg:
-            raise urllib3.exceptions.HTTPError(self.http_error_msg)
+            raise requests.exceptions.HTTPError(self.http_error_msg)
 
 
 class TestSpotify(unittest.TestCase):
@@ -90,6 +92,20 @@ class TestSpotify(unittest.TestCase):
         response = self.spotify.playlist_get_all('testUserId')
         Mock.assert_called_once(mock_oauth)
         self.assertEqual(testJson, response)
+
+    @patch('spotify.OAuth2Session.get')
+    def test_playlist_get_all_error(self, mock_oauth):
+        with open(self.test_files + 'error.json') as oj:
+            errorJson = json.load(oj)
+        mock_oauth.return_value = MockRequest(errorJson)
+        mock_oauth.return_value.raise_for_status_response(
+            400, 'bad request'
+        )
+        with self.assertRaises(SpotifyRunTimeError) as e:
+            self.spotify.playlist_get_all('testUserId')
+        Mock.assert_called_once(mock_oauth)
+        self.assertEqual('Spotify returned with error code: 400, '
+                         'bad request', str(e.exception))
 
     @patch('spotify.Spotify.playlist_get_all')
     def test_playlist_get_id_for_current_user(self, mock_method):

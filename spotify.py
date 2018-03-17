@@ -1,8 +1,8 @@
 import configparser
 import json
+import requests
 from requests_oauthlib import OAuth2Session
 from spotify_error import SpotifySetUpError, SpotifyRunTimeError
-import urllib3.exceptions
 
 
 BASE_URL = 'https://api.spotify.com/v1/'
@@ -52,8 +52,8 @@ class Spotify:
         response = self.client.get(playlists_url)
         try:
             response.raise_for_status()
-        except urllib3.exceptions.HTTPError as e:
-            print(e)
+        except requests.exceptions.HTTPError:
+            raise SpotifyRunTimeError(response.status_code, response.reason)
         return response.json()
 
     def playlist_get_id(self, user_id, target_playlist_name):
