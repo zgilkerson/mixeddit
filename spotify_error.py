@@ -2,8 +2,10 @@ class SpotifyError(Exception):
     """Base Class for Spotify.py errors"""
 
 
-class SpotifySetUpError(SpotifyError):
+class SpotifySetUpError(SpotifyError, TypeError, KeyError):
     """Raised when Spotify has a problem during __init__."""
+    def __init__(self, message):
+        super().__init__(message)
 
 
 class SpotifyRunTimeError(SpotifyError):

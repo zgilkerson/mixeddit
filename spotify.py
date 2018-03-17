@@ -1,7 +1,7 @@
 import configparser
 import json
 from requests_oauthlib import OAuth2Session
-from spotify_error import SpotifySetUpError
+from spotify_error import SpotifySetUpError, SpotifyRunTimeError
 
 
 BASE_URL = 'https://api.spotify.com/v1/'
@@ -18,16 +18,18 @@ class Spotify:
         self.config_section = spotify_section_title
         try:
             self.config.read(self.config_file)
-            client_id = self.config[self.config_section]['client_id']
-            client_secret = self.config[self.config_section]['client_secret']
-            token = json.loads(self.config[self.config_section]['token'])
+            self.client_id = self.config[self.config_section]['client_id']
+            self.client_secret = (self.config[self.config_section]
+                                  ['client_secret'])
+            self.token = json.loads(self.config[self.config_section]['token'])
         except TypeError as e:
             raise SpotifySetUpError('The configuration file needs to be a '
                                     'string or path-like object.')
         except KeyError as e:
             raise SpotifySetUpError('Could not find key {}.'.format(e))
-        extra = {'client_id': client_id, 'client_secret': client_secret}
-        self.client = OAuth2Session(client_id=client_id, token=token,
+        extra = {'client_id': self.client_id,
+                 'client_secret': self.client_secret}
+        self.client = OAuth2Session(client_id=self.client_id, token=self.token,
                                     auto_refresh_url=spotify_auth_url,
                                     auto_refresh_kwargs=extra,
                                     token_updater=self.save_token)
@@ -61,9 +63,9 @@ class Spotify:
     def playlist_replace(self, user_id, playlist_id, track_list):
         """Replaces the given playlist with the list of provided tracks."""
 
-        replace_url = ''.join([BASE_URL, 'users/{user_id}/playlists/'
-                              '{playlist_id}/tracks'])\
-                        .format(user_id=user_id, playlist_id=playlist_id)
+        replace_url = (''.join([BASE_URL, 'users/{user_id}/playlists/'
+                       '{playlist_id}/tracks'])
+                       .format(user_id=user_id, playlist_id=playlist_id))
         payload = {"uris": track_list}
         self.client.put(replace_url, json=payload)
 

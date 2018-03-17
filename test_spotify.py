@@ -1,3 +1,4 @@
+import configparser
 import json
 from spotify import Spotify
 from spotify_error import SpotifyRunTimeError, SpotifySetUpError
@@ -11,31 +12,45 @@ class MockRequest():
         return "get"
 
 
+@patch('spotify.OAuth2Session')
 class TestSpotify(unittest.TestCase):
 
     def setUp(self):
         self.spotify = Spotify()
         self.test_files = 'testFiles/Spotify/'
 
-    @patch('spotify.OAuth2Session')
     def test_init_config_file(self, mock_oauth):
         mock_oauth.return_value = MockRequest()
         ini = self.test_files+'testSpotify.ini'
-        Spotify(spotify_config_file=ini,
-                spotify_section_title='testSpotify')
+        config = configparser.ConfigParser()
+        config.read(ini)
+        client_id = config['testSpotify']['client_id']
+        client_secret = config['testSpotify']['client_secret']
+        token = json.loads(config['testSpotify']['token'])
+        spotify = Spotify(spotify_config_file=ini,
+                          spotify_section_title='testSpotify')
         Mock.assert_called_once(mock_oauth)
-        self.assertTrue(True)
+        self.assertEqual(client_id, spotify.client_id)
+        self.assertEqual(client_secret, spotify.client_secret)
+        self.assertEqual(token, spotify.token)
 
-    @unittest.skip('work in progress')
-    @patch('spotify.OAuth2Session')
-    def test_init_config_not_file(self):
+    def test_init_config_not_file(self, mock_oauth):
         ini = 1
         with self.assertRaises(SpotifySetUpError) as e:
             Spotify(spotify_config_file=ini)
-        # self.assertEqual()
+        self.assertEqual('\'The configuration file needs to be a string or '
+                         'path-like object.\'', str(e.exception))
+
+    def test_init_key_not_in_config(self, mock_oauth):
+        ini = self.test_files+'testSpotify.ini'
+        with self.assertRaises(SpotifySetUpError) as e:
+            Spotify(spotify_config_file=ini,
+                    spotify_section_title='no_section')
+        self.assertEqual('\"Could not find key \'no_section\'.\"',
+                         str(e.exception))
 
     @patch('spotify.Spotify.playlist_get_all')
-    def test_playlist_get_id_for_current_user(self, mock_method):
+    def test_playlist_get_id_for_current_user(self, mock_method, mock_oauth):
         with open(self.test_files+'mockAllPlaylists.json') as json_file:
             mock_method.return_value = json.load(json_file)
         playlist_id = self.spotify.playlist_get_id(
