@@ -2,6 +2,7 @@ import configparser
 import json
 from requests_oauthlib import OAuth2Session
 from spotify_error import SpotifySetUpError, SpotifyRunTimeError
+import urllib3.exceptions
 
 
 BASE_URL = 'https://api.spotify.com/v1/'
@@ -34,10 +35,8 @@ class Spotify:
                                     auto_refresh_kwargs=extra,
                                     token_updater=self.save_token)
         # Check if client was successfully set-up
-        try:
-            self.client.get(BASE_URL+'me')
-        except Exception:
-            raise SpotifySetUpError("There was a problem with authorization.")
+        if not self.client.authorized:
+            raise SpotifySetUpError('There was a problem with authorization.')
 
     def save_token(self, new_token):
         """Writes the new token to the config file."""
@@ -50,7 +49,12 @@ class Spotify:
         """Returns a list of all playlists that belong to the user."""
 
         playlists_url = BASE_URL+'users/{}/playlists'.format(user_id)
-        return self.client.get(playlists_url).json()
+        response = self.client.get(playlists_url)
+        try:
+            response.raise_for_status()
+        except urllib3.exceptions.HTTPError as e:
+            print(e)
+        return response.json()
 
     def playlist_get_id(self, user_id, target_playlist_name):
         """Returns the id of the playlist if found under the user."""

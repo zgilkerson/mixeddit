@@ -4,23 +4,43 @@ from spotify import Spotify
 from spotify_error import SpotifyRunTimeError, SpotifySetUpError
 import unittest
 from unittest.mock import Mock, patch
+import urllib3.exceptions
 
 
 class MockRequest():
 
+    def __init__(self, response, authorized=True):
+        self.response = response
+        self.authorized = authorized
+        self.http_error_msg = ''
+
     def get(self, URL):
-        return "get"
+        return self.response
+
+    def json(self):
+        return self.response
+
+    def raise_for_status_response(self, status_code, reason):
+        self.http_error_msg = u'%s Client Error: %s' % (
+            status_code, reason)
+
+    def raise_for_status(self):
+        if self.http_error_msg:
+            raise urllib3.exceptions.HTTPError(self.http_error_msg)
 
 
-@patch('spotify.OAuth2Session')
 class TestSpotify(unittest.TestCase):
+
+    maxDiff = None
 
     def setUp(self):
         self.spotify = Spotify()
         self.test_files = 'testFiles/Spotify/'
 
+    @patch('spotify.OAuth2Session')
     def test_init_config_file(self, mock_oauth):
-        mock_oauth.return_value = MockRequest()
+        mock_oauth.return_value = MockRequest(self.test_files +
+                                              'currentUserProfile.json')
         ini = self.test_files+'testSpotify.ini'
         config = configparser.ConfigParser()
         config.read(ini)
@@ -34,6 +54,7 @@ class TestSpotify(unittest.TestCase):
         self.assertEqual(client_secret, spotify.client_secret)
         self.assertEqual(token, spotify.token)
 
+    @patch('spotify.OAuth2Session')
     def test_init_config_not_file(self, mock_oauth):
         ini = 1
         with self.assertRaises(SpotifySetUpError) as e:
@@ -41,6 +62,7 @@ class TestSpotify(unittest.TestCase):
         self.assertEqual('\'The configuration file needs to be a string or '
                          'path-like object.\'', str(e.exception))
 
+    @patch('spotify.OAuth2Session')
     def test_init_key_not_in_config(self, mock_oauth):
         ini = self.test_files+'testSpotify.ini'
         with self.assertRaises(SpotifySetUpError) as e:
@@ -49,9 +71,29 @@ class TestSpotify(unittest.TestCase):
         self.assertEqual('\"Could not find key \'no_section\'.\"',
                          str(e.exception))
 
+    @patch('spotify.OAuth2Session')
+    def test_init_wrong_values(self, mock_oauth):
+        ini = self.test_files+'testSpotify.ini'
+        mock_oauth.return_value = MockRequest("fake response", False)
+        with self.assertRaises(SpotifySetUpError) as e:
+            Spotify(spotify_config_file=ini,
+                    spotify_section_title='testSpotify')
+        Mock.assert_called_once(mock_oauth)
+        self.assertEqual('\'There was a problem with authorization.\'',
+                         str(e.exception))
+
+    @patch('spotify.OAuth2Session.get')
+    def test_playlist_get_all(self, mock_oauth):
+        with open(self.test_files + 'allPlaylists.json') as oj:
+            testJson = json.load(oj)
+        mock_oauth.return_value = MockRequest(testJson)
+        response = self.spotify.playlist_get_all('testUserId')
+        Mock.assert_called_once(mock_oauth)
+        self.assertEqual(testJson, response)
+
     @patch('spotify.Spotify.playlist_get_all')
-    def test_playlist_get_id_for_current_user(self, mock_method, mock_oauth):
-        with open(self.test_files+'mockAllPlaylists.json') as json_file:
+    def test_playlist_get_id_for_current_user(self, mock_method):
+        with open(self.test_files+'allPlaylists.json') as json_file:
             mock_method.return_value = json.load(json_file)
         playlist_id = self.spotify.playlist_get_id(
             'xvtx9jvj0ywnfqpma8tyqr37p', 'TopOfShreddit')

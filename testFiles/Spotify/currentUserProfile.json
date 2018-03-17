@@ -1,0 +1,17 @@
+{
+    "country": "US",
+    "display_name": "Zachary Gilkerson",
+    "external_urls": {
+        "spotify": "https://open.spotify.com/user/xvtx9jvj0ywnfqpma8tyqr37p"
+    },
+    "followers": {
+        "href": null,
+        "total": 2
+    },
+    "href": "https://api.spotify.com/v1/users/xvtx9jvj0ywnfqpma8tyqr37p",
+    "id": "xvtx9jvj0ywnfqpma8tyqr37p",
+    "images": [],
+    "product": "premium",
+    "type": "user",
+    "uri": "spotify:user:xvtx9jvj0ywnfqpma8tyqr37p"
+}
