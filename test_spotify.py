@@ -38,8 +38,7 @@ class TestSpotify(unittest.TestCase):
 
     @patch('spotify.OAuth2Session')
     def test_init_config_file(self, mock_oauth):
-        mock_oauth.return_value = MockRequest(self.test_files +
-                                              'currentUserProfile.json')
+        mock_oauth.return_value = MockRequest("fake response", True)
         ini = self.test_files+'testSpotify.ini'
         config = configparser.ConfigParser()
         config.read(ini)
@@ -48,7 +47,6 @@ class TestSpotify(unittest.TestCase):
         token = json.loads(config['testSpotify']['token'])
         spotify = Spotify(spotify_config_file=ini,
                           spotify_section_title='testSpotify')
-        Mock.assert_called_once(mock_oauth)
         self.assertEqual(client_id, spotify.client_id)
         self.assertEqual(client_secret, spotify.client_secret)
         self.assertEqual(token, spotify.token)
@@ -85,8 +83,8 @@ class TestSpotify(unittest.TestCase):
 
     @patch('spotify.OAuth2Session.get')
     def test_playlist_get_all(self, mock_oauth):
-        with open(self.test_files + 'allPlaylists.json') as oj:
-            testJson = json.load(oj)
+        with open(self.test_files + 'allPlaylists.json') as json_file:
+            testJson = json.load(json_file)
         mock_oauth.return_value = MockRequest(testJson)
         response = self.spotify.playlist_get_all('testUserId')
         mock_oauth.assert_called_once_with(Spotify.BASE_URL+'users/testUserId/'
@@ -95,9 +93,8 @@ class TestSpotify(unittest.TestCase):
 
     @patch('spotify.OAuth2Session.get')
     def test_playlist_get_all_error(self, mock_oauth):
-        with open(self.test_files + 'error.json') as oj:
-            errorJson = json.load(oj)
-        mock_oauth.return_value = MockRequest(errorJson)
+        with open(self.test_files + 'error.json') as json_file:
+            mock_oauth.return_value = MockRequest(json.load(json_file))
         mock_oauth.return_value.raise_for_status_response(
             400, 'bad request'
         )
@@ -152,9 +149,8 @@ class TestSpotify(unittest.TestCase):
 
     @patch('spotify.OAuth2Session.put')
     def test_playlist_replace_http_error(self, mock_oauth):
-        with open(self.test_files + 'error.json') as oj:
-            errorJson = json.load(oj)
-        mock_oauth.return_value = MockRequest(errorJson)
+        with open(self.test_files + 'error.json') as json_file:
+            mock_oauth.return_value = MockRequest(json.load(json_file))
         mock_oauth.return_value.raise_for_status_response(
             400, 'bad request'
         )
@@ -163,6 +159,29 @@ class TestSpotify(unittest.TestCase):
         mock_oauth.assert_called_once_with(Spotify.BASE_URL+'users/testUserId/'
                                            'playlists/testPlaylistId/tracks',
                                            json={'uris': []})
+        self.assertEqual(400, e.exception.error_code)
+        self.assertEqual('bad request', e.exception.error_message)
+        self.assertEqual('Spotify returned with error code: 400, '
+                         'bad request', str(e.exception))
+
+    @patch('spotify.OAuth2Session.get')
+    def test_user_get_current_user_id(self, mock_oauth):
+        with open(self.test_files+'currentUserProfile.json') as json_file:
+            mock_oauth.return_value = MockRequest(json.load(json_file))
+        user_id = self.spotify.user_get_current_user_id()
+        mock_oauth.assert_called_once_with(Spotify.BASE_URL+'me')
+        self.assertEqual('xvtx9jvj0ywnfqpma8tyqr37p', user_id)
+
+    @patch('spotify.OAuth2Session.get')
+    def test_user_get_current_user_id_error(self, mock_oauth):
+        with open(self.test_files + 'error.json') as json_file:
+            mock_oauth.return_value = MockRequest(json.load(json_file))
+        mock_oauth.return_value.raise_for_status_response(
+            400, 'bad request'
+        )
+        with self.assertRaises(SpotifyRunTimeError) as e:
+            self.spotify.user_get_current_user_id()
+        mock_oauth.assert_called_once_with(Spotify.BASE_URL+'me')
         self.assertEqual(400, e.exception.error_code)
         self.assertEqual('bad request', e.exception.error_message)
         self.assertEqual('Spotify returned with error code: 400, '

@@ -80,13 +80,22 @@ class Spotify:
     def user_get_current_user_id(self):
         """Returns the id of the current user."""
 
-        user_info = self.client.get(self.BASE_URL+'me').json()
-        return user_info['uri'].split('spotify:user:', 1)[1]
+        response = self.client.get(self.BASE_URL+'me')
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            raise SpotifyRunTimeError(response.status_code, response.reason)
+        response = response.json()
+        return response['uri'].split('spotify:user:', 1)[1]
 
     def search(self, query, query_type):
         """Search Spotify for something."""
 
         search_url = self.BASE_URL+'search'
         payload = {'q': query, 'type': query_type}
-        results = self.client.get(search_url, params=payload).json()
-        return results
+        response = self.client.get(search_url, params=payload)
+        try:
+            response.raise_for_status()
+        except requests.exceptions.HTTPError:
+            raise SpotifyRunTimeError(response.status_code, response.reason)
+        return response.json()
