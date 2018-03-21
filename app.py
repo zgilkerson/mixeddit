@@ -5,8 +5,8 @@ from spotify import Spotify
 
 
 def main():
-    rs = reddit_get_titles()
-    spotify_update_playlist(rs)
+    mixeddit_list = reddit_get_titles()
+    spotify_update_playlist(mixeddit_list)
 
 
 def reddit_get_titles(subreddit='metal', time_period='week', limit=100):

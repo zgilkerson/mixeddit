@@ -1,9 +1,10 @@
 import re
 
-# https://regex101.com/r/T3eOko/10
+# https://regex101.com/r/T3eOko/11
 REDDIT_TITLE_PATTERN = re.compile(
-    r"^(?P<genre>\[.*\])?[ -]*(?P<artist>.+?(?=( -| - |- )))"
-    r"-(?P<track>.+?(?=( -| - |- |\(|\[|\n|$)))(?P<misc>[-\(\[].*)?$")
+    r"^(?P<genre>\[.*\])?[ -]*(?P<artist>.+?(?=( [-]+| [-]+ |[-]+ )))"
+    r"[-]+(?P<track>.+?(?=( [-]+| [-]+ |[-]+ |\(|\[|\n|$)))"
+    r"(?P<misc>[-\(\[].*)?$")
 
 
 class Mixeddit:
