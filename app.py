@@ -19,12 +19,6 @@ def reddit_get_titles(subreddit='metal', time_period='week', limit=100):
         parsedTitle = Mixeddit(submission.title)
         if parsedTitle.valid:
             mixeddit_list.append(parsedTitle)
-    # with open('testFiles/Reddit/parseRedditTitle.json', 'r') as json_file:
-    #     test_json = json.load(json_file)
-    #     for submission in range(0, len(test_json)):
-    #         parsed_title = Mixeddit(test_json[submission]['ogTitle'])
-    #         if parsed_title.valid:
-    #             mixeddit_list.append(parsed_title)
     return mixeddit_list
 
 
