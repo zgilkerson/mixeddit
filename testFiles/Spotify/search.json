@@ -1,0 +1,66 @@
+{
+  "artists": {
+    "href": "https://api.spotify.com/v1/search?query=Sabaton&type=artist&market=US&offset=0&limit=3",
+    "items": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3o2dn2O0FCVsWDFSh8qxgG"
+        },
+        "followers": {
+          "href": null,
+          "total": 473795
+        },
+        "genres": [
+          "metal",
+          "power metal",
+          "swedish metal"
+        ],
+        "href": "https://api.spotify.com/v1/artists/3o2dn2O0FCVsWDFSh8qxgG",
+        "id": "3o2dn2O0FCVsWDFSh8qxgG",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/18e6f3faf93eccca29b93d9a846be3c8fe241f1d",
+            "width": 640
+          },
+          {
+            "height": 320,
+            "url": "https://i.scdn.co/image/919dd7b7300df0c93b51455e0474bfe6e4cf9583",
+            "width": 320
+          },
+          {
+            "height": 160,
+            "url": "https://i.scdn.co/image/804db67ced7e9a1c2bba0eb9c6761c395bbc000d",
+            "width": 160
+          }
+        ],
+        "name": "Sabaton",
+        "popularity": 72,
+        "type": "artist",
+        "uri": "spotify:artist:3o2dn2O0FCVsWDFSh8qxgG"
+      },
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0kcRONM6a4rdlgIhP3DCyN"
+        },
+        "followers": {
+          "href": null,
+          "total": 20
+        },
+        "genres": [],
+        "href": "https://api.spotify.com/v1/artists/0kcRONM6a4rdlgIhP3DCyN",
+        "id": "0kcRONM6a4rdlgIhP3DCyN",
+        "images": [],
+        "name": "Florent Sabaton",
+        "popularity": 4,
+        "type": "artist",
+        "uri": "spotify:artist:0kcRONM6a4rdlgIhP3DCyN"
+      }
+    ],
+    "limit": 3,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 2
+  }
+}
