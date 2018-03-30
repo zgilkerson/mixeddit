@@ -1,13 +1,13 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
-@api_view(['GET'])
-def index(request):
-    return Response()
+class Mixeddit(APIView):
 
+    def get(self, request):
+        return Response(status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
-def playlist_replace(request, subreddit, playlist):
-    return Response({'subreddit': subreddit, 'playlist': playlist})
+    def put(self, request, subreddit, playlist):
+        return Response({'subreddit': subreddit, 'playlist': playlist},
+                        status=status.HTTP_200_OK)
