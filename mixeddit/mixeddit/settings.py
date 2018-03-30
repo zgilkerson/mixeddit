@@ -33,6 +33,11 @@ ALLOWED_HOSTS = []
 ADMIN_ENABLED = False
 
 # Application definition
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'spotify.apps.SpotifyConfig',
 ]
 

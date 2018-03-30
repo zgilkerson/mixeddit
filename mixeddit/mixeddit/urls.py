@@ -17,8 +17,13 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from . import views
+
+app_name = 'mixeddit'
 urlpatterns = [
-    url(r'^spotify/', include('spotify.urls')),
+    url(r'^$', views.index, name='index'),
+    url(r'^(?P<subreddit>[a-zA-Z0-9_]+)/(?P<playlist>[a-zA-Z0-9_]+)/?$',
+        views.playlist_replace, name='playlist_replace'),
 ]
 
 if settings.ADMIN_ENABLED:

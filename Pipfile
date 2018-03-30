@@ -47,6 +47,7 @@ wrapt = "==1.10.11"
 django = "==1.11"
 "pep8" = "*"
 "psycopg2-binary" = "*"
+djangorestframework = "*"
 
 
 [requires]
