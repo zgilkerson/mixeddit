@@ -17,13 +17,20 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
+from rest_framework import renderers
+
+from .views import MixedditViewSet
 
 app_name = 'mixeddit'
+
+mixeddit_http_methods = MixedditViewSet.as_view({
+    'put': 'playlist_replace'
+})
+
 urlpatterns = [
-    url(r'^$', views.Mixeddit.as_view(), name='index'),
-    url(r'^(?P<subreddit>[a-zA-Z0-9_]+)/(?P<playlist>[a-zA-Z0-9_]+)/?$',
-        views.Mixeddit.as_view(), name='playlist_replace'),
+    # url(r'^(?P<subreddit>[a-zA-Z0-9_]+)/(?P<playlist>[a-zA-Z0-9_]+)/?$',
+    # mixeddit_http_methods, name='playlist_replace'),
+    url(r'^playlist_replace/?$', mixeddit_http_methods, name='playlist_replace')
 ]
 
 if settings.ADMIN_ENABLED:
