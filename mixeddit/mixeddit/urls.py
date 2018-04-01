@@ -18,19 +18,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from rest_framework import renderers
+from rest_framework.routers import DefaultRouter
 
 from .views import MixedditViewSet
 
-app_name = 'mixeddit'
-
-mixeddit_http_methods = MixedditViewSet.as_view({
-    'put': 'playlist_replace'
-})
+router = DefaultRouter()
+router.register(r'', MixedditViewSet, base_name='api')
 
 urlpatterns = [
-    # url(r'^(?P<subreddit>[a-zA-Z0-9_]+)/(?P<playlist>[a-zA-Z0-9_]+)/?$',
-    # mixeddit_http_methods, name='playlist_replace'),
-    url(r'^playlist_replace/?$', mixeddit_http_methods, name='playlist_replace')
+    url(r'^', include(router.urls))
 ]
 
 if settings.ADMIN_ENABLED:

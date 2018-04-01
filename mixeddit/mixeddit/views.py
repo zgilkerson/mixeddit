@@ -8,5 +8,5 @@ class MixedditViewSet(viewsets.ViewSet):
     parser_classes = (JSONParser,)
 
     @detail_route(methods=['put'])
-    def playlist_replace(self, request):
+    def playlist_replace(self, request, pk):
         return Response(request.data, status=status.HTTP_200_OK)
