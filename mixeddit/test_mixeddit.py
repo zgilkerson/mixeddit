@@ -1,5 +1,5 @@
 import json
-from mixeddit import Mixeddit
+from mixeddit.mixeddit import Mixeddit
 import unittest
 
 
