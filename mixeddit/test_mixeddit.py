@@ -1,9 +1,9 @@
 import json
 from mixeddit.mixeddit import Mixeddit
-import unittest
+from django.test import TestCase
 
 
-class Test_Mixeddit(unittest.TestCase):
+class Test_Mixeddit(TestCase):
 
     def test_title_parsing(self):
         with open('testFiles/Reddit/parseRedditTitle.json', 'r') as json_file:
@@ -21,6 +21,3 @@ class Test_Mixeddit(unittest.TestCase):
                     else:
                         self.assertIsNone(rso.artist)
                         self.assertIsNone(rso.track)
-
-if __name__ == '__main__':
-    unittest.main()

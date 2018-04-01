@@ -3,7 +3,8 @@ import json
 import requests
 from spotify.spotify import Spotify
 from spotify.spotify_error import SpotifyRunTimeError, SpotifySetUpError
-import unittest
+# import unittest
+from django.test import TestCase
 from unittest.mock import Mock, patch
 
 
@@ -28,7 +29,7 @@ class MockRequest():
             raise requests.exceptions.HTTPError(self.http_error_msg)
 
 
-class TestSpotify(unittest.TestCase):
+class TestSpotify(TestCase):
 
     maxDiff = None
 
@@ -218,6 +219,3 @@ class TestSpotify(unittest.TestCase):
         self.assertEqual('bad request', e.exception.error_message)
         self.assertEqual('Spotify returned with error code: 400, '
                          'bad request', str(e.exception))
-
-if __name__ == '__main__':
-    unittest.main()
