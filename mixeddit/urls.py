@@ -29,7 +29,8 @@ router = DefaultRouter()
 router.register(r'', MixedditViewSet, base_name='api')
 
 urlpatterns = [
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    url(r'^', include('spotify.urls'))
 ] + staticfiles_urlpatterns()
 
 if settings.ADMIN_ENABLED:
