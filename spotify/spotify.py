@@ -10,12 +10,13 @@ class Spotify:
 
     BASE_URL = 'https://api.spotify.com/v1/'
 
-    def __init__(self, session):
+    def __init__(self, session, config_file='spotify.ini',
+                 config_section='spotify'):
         self.session = session
         spotify_auth_url = 'https://accounts.spotify.com/api/token'
         self.config = configparser.ConfigParser()
-        self.config_file = 'spotify.ini'
-        self.config_section = 'spotify'
+        self.config_file = config_file
+        self.config_section = config_section
         try:
             self.config.read(self.config_file)
             self.client_id = self.config[self.config_section]['client_id']
@@ -28,7 +29,8 @@ class Spotify:
             raise SpotifySetUpError('Could not find key {}.'.format(e))
         extra = {'client_id': self.client_id,
                  'client_secret': self.client_secret}
-        self.client = OAuth2Session(client_id=self.client_id, token=self.session['token'],
+        self.client = OAuth2Session(client_id=self.client_id,
+                                    token=self.session['token'],
                                     auto_refresh_url=spotify_auth_url,
                                     auto_refresh_kwargs=extra,
                                     token_updater=self.save_token)
@@ -84,7 +86,7 @@ class Spotify:
             raise SpotifyRunTimeError(response.status_code, response.reason)
         response = response.json()
         return response
-    
+
     def user_get_current_user_id(self):
         """Returns the id of the current user."""
 
