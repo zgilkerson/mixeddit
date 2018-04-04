@@ -4,7 +4,7 @@ from requests_oauthlib import OAuth2Session
 from django.http import HttpResponseRedirect
 
 from rest_framework import status, viewsets
-from rest_framework.decorators import detail_route, action
+from rest_framework.decorators import action
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -16,8 +16,8 @@ from spotify.spotify_error import SpotifyRunTimeError, SpotifyRunTimeError
 class SpotifyViewSet(viewsets.ViewSet):
     parser_classes = (JSONParser,)
 
-    @detail_route(methods=['get'])
-    def login(self, request, pk):
+    @action(methods=['get'], detail=False)
+    def login(self, request, *args, **kwargs):
         scope = ('playlist-read-private, playlist-modify-public, '
                  'playlist-modify-private')
         config = configparser.ConfigParser()
@@ -32,7 +32,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         request.session['oauth_state'] = state
         return HttpResponseRedirect(auth_url)
 
-    @detail_route(methods=['get'])
+    @action(methods=['get'], detail=False)
     def callback(self, request, *args, **kwargs):
         config = configparser.ConfigParser()
         config.read('spotify.ini')
@@ -48,9 +48,9 @@ class SpotifyViewSet(viewsets.ViewSet):
             authorization_response=request.build_absolute_uri(),
             client_secret=client_secret)
         request.session['token'] = token
-        return HttpResponseRedirect(reverse('me'))
+        return HttpResponseRedirect(reverse('spotify-me'))
 
-    @detail_route(methods=['get'])
+    @action(methods=['get'], detail=False)
     def me(self, request, *args, **kwargs):
         # print(reverse('spotify-me', request=request))
         return HttpResponseRedirect(reverse('spotify-you'))
@@ -58,6 +58,6 @@ class SpotifyViewSet(viewsets.ViewSet):
         # return Response(spotify.user_get_current_user,
         #                 status=status.HTTP_200_OK)
 
-    @detail_route(methods=['get'])
+    @action(methods=['get'], detail=False, url_name='you')
     def you(self, request, *args, **kwargs):
         return Response(status=status.HTTP_200_OK)
