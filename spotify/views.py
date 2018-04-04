@@ -52,12 +52,6 @@ class SpotifyViewSet(viewsets.ViewSet):
 
     @action(methods=['get'], detail=False)
     def me(self, request, *args, **kwargs):
-        # print(reverse('spotify-me', request=request))
-        return HttpResponseRedirect(reverse('spotify-you'))
-        # spotify = Spotify(request.session)
-        # return Response(spotify.user_get_current_user,
-        #                 status=status.HTTP_200_OK)
-
-    @action(methods=['get'], detail=False, url_name='you')
-    def you(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_200_OK)
+        spotify = Spotify(request.session)
+        return Response(spotify.user_get_current_user(),
+                        status=status.HTTP_200_OK)
