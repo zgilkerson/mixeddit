@@ -10,18 +10,18 @@ class Spotify:
 
     BASE_URL = 'https://api.spotify.com/v1/'
 
-    def __init__(self, spotify_config_file='spotify.ini',
-                 spotify_section_title='spotify'):
+    def __init__(self, session, config_file='spotify.ini',
+                 config_section='spotify'):
+        self.session = session
         spotify_auth_url = 'https://accounts.spotify.com/api/token'
         self.config = configparser.ConfigParser()
-        self.config_file = spotify_config_file
-        self.config_section = spotify_section_title
+        self.config_file = config_file
+        self.config_section = config_section
         try:
             self.config.read(self.config_file)
             self.client_id = self.config[self.config_section]['client_id']
             self.client_secret = (self.config[self.config_section]
                                   ['client_secret'])
-            self.token = json.loads(self.config[self.config_section]['token'])
         except TypeError as e:
             raise SpotifySetUpError('The configuration file needs to be a '
                                     'string or path-like object.')
@@ -29,7 +29,8 @@ class Spotify:
             raise SpotifySetUpError('Could not find key {}.'.format(e))
         extra = {'client_id': self.client_id,
                  'client_secret': self.client_secret}
-        self.client = OAuth2Session(client_id=self.client_id, token=self.token,
+        self.client = OAuth2Session(client_id=self.client_id,
+                                    token=self.session['token'],
                                     auto_refresh_url=spotify_auth_url,
                                     auto_refresh_kwargs=extra,
                                     token_updater=self.save_token)
@@ -40,9 +41,7 @@ class Spotify:
     def save_token(self, new_token):
         """Writes the new token to the config file."""
 
-        self.config[self.config_section]['token'] = json.dumps(new_token)
-        with open(self.config_file, 'w') as cf:
-            self.config.write(cf)
+        self.session['token'] = new_token
 
     def playlist_get_all(self, user_id):
         """Returns a list of all playlists that belong to the user."""
@@ -77,8 +76,8 @@ class Spotify:
         except requests.exceptions.HTTPError:
             raise SpotifyRunTimeError(response.status_code, response.reason)
 
-    def user_get_current_user_id(self):
-        """Returns the id of the current user."""
+    def user_get_current_user(self):
+        """Returns current user information."""
 
         response = self.client.get(self.BASE_URL+'me')
         try:
@@ -86,6 +85,12 @@ class Spotify:
         except requests.exceptions.HTTPError:
             raise SpotifyRunTimeError(response.status_code, response.reason)
         response = response.json()
+        return response
+
+    def user_get_current_user_id(self):
+        """Returns the id of the current user."""
+
+        response = self.user_get_current_user()
         return response['uri'].split('spotify:user:', 1)[1]
 
     def search(self, query, query_type):

@@ -15,6 +15,12 @@ class MockRequest():
         self.authorized = authorized
         self.http_error_msg = ''
 
+    def get(self):
+        return self
+
+    def put(self):
+        return self
+
     def json(self):
         return self.response
 
@@ -33,9 +39,16 @@ class TestSpotify(TestCase):
 
     maxDiff = None
 
-    def setUp(self):
-        self.spotify = Spotify()
+    @patch('spotify.spotify.OAuth2Session')
+    def setUp(self, mock_oauth):
+        mock_oauth.return_value = MockRequest("fake response", True)
         self.test_files = 'testFiles/Spotify/'
+        ini = self.test_files+'testSpotify.ini'
+        config = configparser.ConfigParser()
+        config.read(ini)
+        self.session = {'token': config['testSpotify']['token']}
+        self.spotify = Spotify(self.session, config_file=ini,
+                               config_section='testSpotify')
 
     @patch('spotify.spotify.OAuth2Session')
     def test_init_config_file(self, mock_oauth):
@@ -45,18 +58,16 @@ class TestSpotify(TestCase):
         config.read(ini)
         client_id = config['testSpotify']['client_id']
         client_secret = config['testSpotify']['client_secret']
-        token = json.loads(config['testSpotify']['token'])
-        spotify = Spotify(spotify_config_file=ini,
-                          spotify_section_title='testSpotify')
+        spotify = Spotify(self.session, config_file=ini,
+                          config_section='testSpotify')
         self.assertEqual(client_id, spotify.client_id)
         self.assertEqual(client_secret, spotify.client_secret)
-        self.assertEqual(token, spotify.token)
 
     @patch('spotify.spotify.OAuth2Session')
     def test_init_config_not_file(self, mock_oauth):
         ini = 1
         with self.assertRaises(SpotifySetUpError) as e:
-            Spotify(spotify_config_file=ini)
+            Spotify(self.session, config_file=ini)
         Mock.assert_not_called(mock_oauth)
         self.assertEqual('\'The configuration file needs to be a string or '
                          'path-like object.\'', str(e.exception))
@@ -65,8 +76,8 @@ class TestSpotify(TestCase):
     def test_init_key_not_in_config(self, mock_oauth):
         ini = self.test_files+'testSpotify.ini'
         with self.assertRaises(SpotifySetUpError) as e:
-            Spotify(spotify_config_file=ini,
-                    spotify_section_title='no_section')
+            Spotify(self.session, config_file=ini,
+                    config_section='no_section')
         Mock.assert_not_called(mock_oauth)
         self.assertEqual('\"Could not find key \'no_section\'.\"',
                          str(e.exception))
@@ -76,13 +87,13 @@ class TestSpotify(TestCase):
         ini = self.test_files+'testSpotify.ini'
         mock_oauth.return_value = MockRequest("fake response", False)
         with self.assertRaises(SpotifySetUpError) as e:
-            Spotify(spotify_config_file=ini,
-                    spotify_section_title='testSpotify')
+            Spotify(self.session, config_file=ini,
+                    config_section='testSpotify')
         Mock.assert_called_once(mock_oauth)
         self.assertEqual('\'There was a problem with authorization.\'',
                          str(e.exception))
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_playlist_get_all(self, mock_oauth):
         with open(self.test_files + 'allPlaylists.json') as json_file:
             testJson = json.load(json_file)
@@ -92,7 +103,7 @@ class TestSpotify(TestCase):
                                            'playlists')
         self.assertEqual(testJson, response)
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_playlist_get_all_error(self, mock_oauth):
         with open(self.test_files + 'error.json') as json_file:
             mock_oauth.return_value = MockRequest(json.load(json_file))
@@ -134,7 +145,7 @@ class TestSpotify(TestCase):
         mock_method.assert_called_once_with('xvtx9jvj0ywnfqpma8tyqr37p')
         self.assertEqual(None, playlist_id)
 
-    @patch('spotify.spotify.OAuth2Session.put')
+    @patch('spotify.test_spotify.MockRequest.put')
     def test_playlist_replace(self, mock_oauth):
         # Testament - Practice What You Preach
         # Rage Against The Machine - Testify
@@ -148,7 +159,7 @@ class TestSpotify(TestCase):
                                            'playlists/testPlaylistId/tracks',
                                            json={'uris': track_list})
 
-    @patch('spotify.spotify.OAuth2Session.put')
+    @patch('spotify.test_spotify.MockRequest.put')
     def test_playlist_replace_http_error(self, mock_oauth):
         with open(self.test_files + 'error.json') as json_file:
             mock_oauth.return_value = MockRequest(json.load(json_file))
@@ -165,7 +176,7 @@ class TestSpotify(TestCase):
         self.assertEqual('Spotify returned with error code: 400, '
                          'bad request', str(e.exception))
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_user_get_current_user_id(self, mock_oauth):
         with open(self.test_files+'currentUserProfile.json') as json_file:
             mock_oauth.return_value = MockRequest(json.load(json_file))
@@ -173,7 +184,7 @@ class TestSpotify(TestCase):
         mock_oauth.assert_called_once_with(Spotify.BASE_URL+'me')
         self.assertEqual('xvtx9jvj0ywnfqpma8tyqr37p', user_id)
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_user_get_current_user_id_error(self, mock_oauth):
         with open(self.test_files + 'error.json') as json_file:
             mock_oauth.return_value = MockRequest(json.load(json_file))
@@ -188,7 +199,7 @@ class TestSpotify(TestCase):
         self.assertEqual('Spotify returned with error code: 400, '
                          'bad request', str(e.exception))
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_search(self, mock_oauth):
         with open(self.test_files + 'allPlaylists.json') as json_file:
             testJson = json.load(json_file)
@@ -201,7 +212,7 @@ class TestSpotify(TestCase):
                                                    'type': query_type})
         self.assertEqual(testJson, response)
 
-    @patch('spotify.spotify.OAuth2Session.get')
+    @patch('spotify.test_spotify.MockRequest.get')
     def test_search_error(self, mock_oauth):
         with open(self.test_files + 'error.json') as json_file:
             mock_oauth.return_value = MockRequest(json.load(json_file))

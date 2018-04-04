@@ -3,6 +3,7 @@
 *.ini
 !testFiles/Spotify/testSpotify.ini
 *.code-workspace
+static/
 
 # Generic Python Ignore from Github
 # Byte-compiled / optimized / DLL files

@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.views import serve
+from django.views.generic import RedirectView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from rest_framework import renderers
 from rest_framework.routers import DefaultRouter
@@ -26,8 +29,9 @@ router = DefaultRouter()
 router.register(r'', MixedditViewSet, base_name='api')
 
 urlpatterns = [
-    url(r'^', include(router.urls))
-]
+    url(r'^', include(router.urls)),
+    url(r'^spotify/', include('spotify.urls'))
+] + staticfiles_urlpatterns()
 
 if settings.ADMIN_ENABLED:
     urlpatterns += [
