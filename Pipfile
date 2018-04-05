@@ -49,6 +49,7 @@ django = "==1.11"
 "pep8" = "*"
 "psycopg2-binary" = "*"
 djangorestframework = "*"
+django-cors-headers = "*"
 
 
 [requires]
