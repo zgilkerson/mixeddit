@@ -28,7 +28,7 @@ SECRET_KEY = config['django']['secret_key']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'http']
 
 ADMIN_ENABLED = False
 
@@ -39,9 +39,10 @@ REST_FRAMEWORK = {
     )
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:4200'
-)
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',

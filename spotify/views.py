@@ -23,7 +23,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         config = configparser.ConfigParser()
         config.read('spotify.ini')
         client_id = config['spotify']['client_id']
-        redirect_uri = 'https://localhost:8000/spotify/callback'
+        redirect_uri = 'https://localhost/spotify/callback'
         oauth = OAuth2Session(client_id=client_id,
                               redirect_uri=redirect_uri,
                               scope=scope)
@@ -38,7 +38,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         config.read('spotify.ini')
         client_id = config['spotify']['client_id']
         client_secret = config['spotify']['client_secret']
-        redirect_uri = 'https://localhost:8000/spotify/callback'
+        redirect_uri = 'https://localhost/spotify/callback'
         oauth = OAuth2Session(client_id=client_id,
                               redirect_uri=redirect_uri,
                               state=request.session['oauth_state'])
@@ -54,4 +54,9 @@ class SpotifyViewSet(viewsets.ViewSet):
     def me(self, request, *args, **kwargs):
         spotify = Spotify(request.session)
         return Response(spotify.user_get_current_user(),
+                        status=status.HTTP_200_OK)
+
+    @action(methods=['get'], detail=False)
+    def hello(self, request, *args, **kwargs):
+        return Response({'yo': 'kek'},
                         status=status.HTTP_200_OK)
