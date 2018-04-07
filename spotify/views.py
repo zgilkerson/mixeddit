@@ -1,7 +1,7 @@
 import configparser
 from requests_oauthlib import OAuth2Session
 
-from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -30,7 +30,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         auth_url, state = oauth.authorization_url(
             'https://accounts.spotify.com/authorize')
         request.session['oauth_state'] = state
-        return HttpResponseRedirect(auth_url)
+        return redirect(auth_url)
 
     @action(methods=['get'], detail=False)
     def callback(self, request, *args, **kwargs):
@@ -48,7 +48,7 @@ class SpotifyViewSet(viewsets.ViewSet):
             authorization_response=request.build_absolute_uri(),
             client_secret=client_secret)
         request.session['token'] = token
-        return HttpResponseRedirect(reverse('spotify-me'))
+        return redirect(reverse('spotify-me'))
 
     @action(methods=['get'], detail=False)
     def me(self, request, *args, **kwargs):
@@ -58,5 +58,6 @@ class SpotifyViewSet(viewsets.ViewSet):
 
     @action(methods=['get'], detail=False)
     def hello(self, request, *args, **kwargs):
-        return Response({'yo': 'kek'},
+
+        return Response({'yo': 'asdfasdfa'},
                         status=status.HTTP_200_OK)

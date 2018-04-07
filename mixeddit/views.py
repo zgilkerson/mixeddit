@@ -25,7 +25,7 @@ class MixedditViewSet(viewsets.ViewSet):
             parsedTitle = Mixeddit(submission.title)
             if parsedTitle.valid:
                 mixeddit_list.append(parsedTitle)
-        spotify = Spotify()
+        spotify = Spotify(request.session)
         user_id = spotify.user_get_current_user_id()
         playlist_id = spotify.playlist_get_id(user_id,
                                               request.data['playlist'])

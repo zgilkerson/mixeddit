@@ -28,7 +28,7 @@ SECRET_KEY = config['django']['secret_key']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'http']
+ALLOWED_HOSTS = []
 
 ADMIN_ENABLED = False
 
@@ -40,9 +40,16 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_WHITELIST = (
+#     'google.com',
+#     'hostname.example.com',
+#     'localhost:8000',
+#     '127.0.0.1:9000',
+#     'localhost',
+#     'null'
+# )
+
 CORS_ALLOW_CREDENTIALS = True
-
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -51,14 +58,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sslserver',
-    'corsheaders',
+    # 'sslserver',
+    # 'corsheaders',
     'rest_framework',
     'spotify.apps.SpotifyConfig',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -142,8 +149,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+ANGULAR_APP_DIR = os.path.join(BASE_DIR, 'frontend/dist')
 
 STATICFILES_DIRS = (
-    '/home/zgilkerson/projects/mixeddit/frontend/',
+    # '/home/zgilkerson/projects/mixeddit/frontend/',
+    os.path.join(ANGULAR_APP_DIR),
 )

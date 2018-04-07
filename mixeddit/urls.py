@@ -30,7 +30,10 @@ router.register(r'', MixedditViewSet, base_name='api')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^spotify/', include('spotify.urls'))
+    url(r'^spotify/', include('spotify.urls')),
+    url(r'^$', serve, kwargs={'path': 'index.html'}),
+    url(r'^(?!/?static/)(?!/?media/)(?P<path>.*\..*)$',
+        RedirectView.as_view(url='/static/%(path)s', permanent=False)),
 ] + staticfiles_urlpatterns()
 
 if settings.ADMIN_ENABLED:
