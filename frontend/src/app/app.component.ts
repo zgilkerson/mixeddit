@@ -1,29 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/toPromise';
+
+import { SpotifyService } from './spotify.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [SpotifyService]
 })
-export class AppComponent {
+
+@Injectable()
+export class AppComponent implements OnInit {
   title = 'app';
+  logged_in = false;
 
-  constructor(private http: Http) {}
+  constructor(private spotify: SpotifyService) {}
 
-  public me() {
-    const url = 'https://localhost/spotify/hello/';
-    this.http.get(url).toPromise().then((res) => {
-      console.log(res.json());
-    });
-  }
-
-  public login() {
-    const url = 'https://localhost/spotify/login/';
-    this.http.get(url).toPromise().then((res) => {
-      console.log(res.json());
-    });
+  ngOnInit() {
+    this.spotify.getLoggedIn().subscribe(
+      (data) => this.logged_in = true,
+      (error: HttpErrorResponse) => this.logged_in = false
+    );
   }
 }

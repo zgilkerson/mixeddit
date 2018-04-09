@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatButton } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
+import { SpotifyService } from './spotify.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -14,11 +16,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
