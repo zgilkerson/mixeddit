@@ -1,13 +1,6 @@
 Concept:
+    Take the top subreddit posts of the past <time unit> and convert them into a Spotify playlist
 
-    Take the top of the week from [Shreddit](reddit.com/r/metal) and pipe it into a spotify playlist.
+[Reddit Brand Guidelines](https://www.reddithelp.com/sites/default/files/2018-03/reddit_brand_guidelines.pdf)
 
-### The Files
-* [`app.py`](app.py)
-    * Main file for now. When ran will grab the top 100 posts of the past week.
-* [`rsObject.py`](rsObject.py)
-    * Reddit-Spotify Object. Has attributes like the original reddit post name, if it is a valid song, and what the artist and track name are.
-* [`spooter.py`](spooter.py)
-    * Spotify API wrapper
-* `test*.py`
-    * test files for the respective py files
+[Spotify Logo Guidelines](https://developer.spotify.com/wp-content/uploads/2014/06/spotify-logo-color-guidelines.pdf)

@@ -11,12 +11,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserComponent } from './user/user.component';
+import { GuestComponent } from './guest/guest.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent
+    HomepageComponent,
+    UserComponent,
+    GuestComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,4 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  title = 'Mixeddit';
-}
+export class AppModule {}

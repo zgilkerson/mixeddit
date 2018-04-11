@@ -3,11 +3,6 @@
 @mixin homepage-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
-
-  // your custom component's selector
-  app-homepage .homepage-header-background {
-    background-color: mat-color($primary);
-  }
 }
 
 .homepage-header-background {
@@ -15,7 +10,7 @@
 }
 
 .homepage-header-section {
-    padding-top: 15px;
+    padding: 15px 0;
     text-align: center;
 }
 
@@ -39,4 +34,14 @@ app-homepage .homepage-header-headline {
     font-weight: 300;
     line-height: 28px;
     margin: 15px 0 25px 0;
+}
+
+app-guest {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding: 16px;
 }

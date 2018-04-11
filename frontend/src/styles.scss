@@ -3,7 +3,7 @@
 
 @include mat-core();
 $primary: mat-palette($mixeddit-light-blue);
-$accent:  mat-palette($mixeddit-green);
+$accent:  mat-palette($mixeddit-red);
 $warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).

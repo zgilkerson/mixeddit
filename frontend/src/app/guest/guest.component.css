@@ -1,0 +1,32 @@
+.guest-row {
+    margin: 15px 0;
+    display: flex;
+    max-width: 920px;
+}
+
+.guest-row-desc {
+    line-height: 2;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0 0 16px 0;
+    padding: 0;
+}
+
+.spotify-button {
+    background-color: #1DB954;
+    color: black;
+    font-size: 25px;
+}
+
+.spotify-logo {
+    margin: 5px 0;
+}
