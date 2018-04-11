@@ -1,0 +1,42 @@
+@import '~@angular/material/theming';
+
+@mixin homepage-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  // your custom component's selector
+  app-homepage .homepage-header-background {
+    background-color: mat-color($primary);
+  }
+}
+
+.homepage-header-background {
+    overflow: hidden;
+}
+
+.homepage-header-section {
+    padding-top: 15px;
+    text-align: center;
+}
+
+app-homepage .homepage-header-headline {
+    color: white;
+}
+
+.homepage-header-headline h1 {
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 56px;
+    margin: 15px 5px;
+}
+
+.mat-h1 {
+    font: 400 24px/32px Roboto,Helvetica Neue,sans-serif;
+}
+
+.homepage-header-headline h2 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 15px 0 25px 0;
+}

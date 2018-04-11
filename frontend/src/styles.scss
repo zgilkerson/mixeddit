@@ -14,3 +14,11 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 // theme our own components
 @import "app/app.component.scss";
 @include app-component-theme($theme);
+
+@import "app/homepage/homepage.component.scss";
+@include homepage-component-theme($theme);
+
+body {
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    margin: 0;
+}
