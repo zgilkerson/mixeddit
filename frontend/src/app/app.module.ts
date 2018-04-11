@@ -9,20 +9,26 @@ import { AppComponent } from './app.component';
 import { SpotifyService } from './spotify.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    AppRoutingModule
   ],
   providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  title = 'Mixeddit';
+}
