@@ -1,6 +1,20 @@
-<div *ngIf="!logged_in" style="text-align:center">
+<main>
+  <header>
+    <div class="homepage-header-section">
+      <div>
+        <h1 class="mat-h1">Mixeddit</h1>
+        <h2>Subreddit to Spotify Playlist Generator</h2>
+      </div>
+      <div>
+        <a mat-raised-button color="accent" href='/spotify/login'>Click here please</a>        
+      </div>
+    </div>
+  </header>
+</main>
+
+<!-- <div *ngIf="!logged_in" style="text-align:center">
   <a mat-raised-button color="primary" href='/spotify/login'>Click here please</a>
-</div>
+</div> -->
 <div *ngIf="logged_in" style="text-align:center">
   hey, welcome!
 </div>

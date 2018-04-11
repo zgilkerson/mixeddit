@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+
+@mixin app-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  // your custom component's selector
+  header {
+    background-color: mat-color($primary);
+  }
+}
+
+h1 {
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 56px;
+  margin: 15px 5px;
+}
+
+.homepage-header-section {
+  text-align: center;
+}

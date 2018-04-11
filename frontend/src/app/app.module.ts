@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatButton } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatCardModule
   ],
   providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]

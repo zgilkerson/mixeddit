@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import 'mixeddit_palette.scss';
+
+@include mat-core();
+$primary: mat-palette($mixeddit-light-blue);
+$accent:  mat-palette($mixeddit-green);
+$warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-dark-theme($primary, $accent, $warn);
+// theme the angular components
+@include angular-material-theme($theme);
+
+// theme our own components
+@import "app/app.component.scss";
+@include app-component-theme($theme);
