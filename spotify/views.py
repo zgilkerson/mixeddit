@@ -9,6 +9,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
+from reddit.reddit import Reddit
+
 from spotify.spotify import Spotify
 from spotify.spotify_error import SpotifyRunTimeError, SpotifyRunTimeError
 
@@ -62,5 +64,18 @@ class SpotifyViewSet(viewsets.ViewSet):
             request.session['token']
             return Response(status=status.HTTP_200_OK)
         except KeyError:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=status.HTTP_403_FORBIDDEN)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(methods=['put'], detail=False)
+    def playlist_replace(self, request, *args, **kwargs):
+        try:
+            session = request.session['token']
+        except KeyError:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        subreddit = request.data['subreddit']
+        playlist = request.data['playlist']
+        mixeddit_list = Reddit.parseSubreddit(subreddit)
+        spotify = Spotify(session)
+        spotify.playlist_replace(playlist, mixeddit_list)
+        return Response(request.data, status=status.HTTP_200_OK)

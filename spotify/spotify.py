@@ -63,13 +63,29 @@ class Spotify:
             if(playlist['name'] == target_playlist_name):
                 return playlist['id']
 
-    def playlist_replace(self, user_id, playlist_id, track_list):
+    def playlist_replace(self, playlist, mixeddit_list):
         """Replaces the given playlist with the list of provided tracks."""
+        user_id = self.user_get_current_user_id()
+        playlist_id = self.playlist_get_id(user_id, playlist)
+        track_uri_list = []
+        for reddit_track in mixeddit_list:
+            try:
+                search_results = self.search(reddit_track.track, 'track')
+                try:
+                    for spotify_track in search_results['tracks']['items']:
+                        if (spotify_track['artists'][0]['name'].lower() ==
+                                reddit_track.artist.lower()):
+                            track_uri_list.append(spotify_track['uri'])
+                            break
+                except KeyError:
+                    pass
+            except SpotifyRunTimeError:
+                pass
 
         replace_url = (''.join([self.BASE_URL, 'users/{user_id}/playlists/'
                        '{playlist_id}/tracks'])
                        .format(user_id=user_id, playlist_id=playlist_id))
-        payload = {"uris": track_list}
+        payload = {"uris": track_uri_list}
         response = self.client.put(replace_url, json=payload)
         try:
             response.raise_for_status()
