@@ -12,7 +12,6 @@ import { SpotifyService } from '../spotify.service';
   styleUrls: ['./homepage.component.scss'],
   providers: [SpotifyService]
 })
-
 export class HomepageComponent implements OnInit {
 
   logged_in = false;
