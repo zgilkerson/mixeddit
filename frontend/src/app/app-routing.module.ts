@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
+  // { path: 'static/index.html', redirectTo: '', pathMatch: 'full' },
   { path: '', component: HomepageComponent, pathMatch: 'full' },
 ];
 
