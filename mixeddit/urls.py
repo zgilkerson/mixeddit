@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.views import serve
-from django.views.generic import RedirectView
+from django.views.generic import RedirectView, TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from rest_framework import renderers
@@ -29,9 +29,10 @@ router = DefaultRouter()
 router.register(r'', MixedditViewSet, base_name='api')
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name="index.html")),
     url(r'^', include(router.urls)),
     url(r'^spotify/', include('spotify.urls')),
-    url(r'^$', serve, kwargs={'path': 'index.html'}),
+    url(r'^static/$', TemplateView.as_view(template_name="index.html")),
     url(r'^(?!/?static/)(?!/?media/)(?P<path>.*\..*)$',
         RedirectView.as_view(url='/static/%(path)s', permanent=False)),
 ] + staticfiles_urlpatterns()
