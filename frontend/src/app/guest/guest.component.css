@@ -4,6 +4,12 @@
     max-width: 920px;
 }
 
+.guest-row-reverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    flex-direction: row-reverse;
+}
+
 .guest-row-desc {
     line-height: 2;
     display: flex;
@@ -12,6 +18,10 @@
     flex-direction: column;
     -webkit-box-pack: center;
     justify-content: center;
+}
+
+.guest-row-half {
+    width: 50%;
 }
 
 h2 {
@@ -27,6 +37,6 @@ h2 {
     font-size: 25px;
 }
 
-.spotify-logo {
+.spotify-icon {
     margin: 5px 0;
 }
