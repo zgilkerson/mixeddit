@@ -1,0 +1,10 @@
+<header class="primary">
+  <div class="homepage-header-section">
+    <div class="homepage-header-headline">
+      <h1 class="mat-h1">Mixeddit</h1>
+      <h2>Subreddit Playlist Generator for Spotify</h2>
+    </div>
+  </div>
+</header>
+<app-user *ngIf="logged_in"></app-user>
+<app-guest *ngIf="!logged_in"></app-guest>

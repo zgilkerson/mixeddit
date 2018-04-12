@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+@mixin homepage-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+}
+
+.homepage-header-background {
+    overflow: hidden;
+}
+
+.homepage-header-section {
+    padding: 15px 0;
+    text-align: center;
+}
+
+app-homepage .homepage-header-headline {
+    color: white;
+}
+
+.homepage-header-headline h1 {
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 56px;
+    margin: 15px 5px;
+}
+
+.mat-h1 {
+    font: 400 24px/32px Roboto,Helvetica Neue,sans-serif;
+}
+
+.homepage-header-headline h2 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 15px 0 25px 0;
+}
+
+app-guest {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding: 16px;
+}

@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+
+@mixin app-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .primary {
+    background-color: mat-color($primary);
+  }
+
+  .primary-lighter {
+    background-color: mat-color($primary, lighter);
+  }
+
+  .primary-darker {
+    background-color: mat-color($primary, darker);
+  }
+
+  .accent {
+    background-color: mat-color($accent);
+  }
+
+  .accent-lighter {
+    background-color: mat-color($accent, lighter);
+  }
+
+  .accent-darker {
+    background-color: mat-color($accent, darker);
+  }
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  // position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

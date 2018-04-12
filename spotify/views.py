@@ -57,7 +57,10 @@ class SpotifyViewSet(viewsets.ViewSet):
                         status=status.HTTP_200_OK)
 
     @action(methods=['get'], detail=False)
-    def hello(self, request, *args, **kwargs):
-
-        return Response({'yo': 'asdfasdfa'},
-                        status=status.HTTP_200_OK)
+    def check_logged_in(self, request, *args, **kwargs):
+        try:
+            request.session['token']
+            return Response(status=status.HTTP_200_OK)
+        except KeyError:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
