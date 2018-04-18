@@ -31,7 +31,7 @@ router.register(r'', MixedditViewSet, base_name='api')
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name="index.html")),
     url(r'^', include(router.urls)),
-    url(r'^spotify/', include('spotify.urls')),
+    url(r'^api/spotify/', include('spotify.urls')),
     url(r'^static/$', TemplateView.as_view(template_name="index.html")),
     url(r'^(?!/?static/)(?!/?media/)(?P<path>.*\..*)$',
         RedirectView.as_view(url='/static/%(path)s', permanent=False)),

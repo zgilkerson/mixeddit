@@ -11,8 +11,10 @@ export class SpotifyService {
               private location: Location) { }
 
   getLoggedIn() {
-    let url = this.location.prepareExternalUrl(this.api + 'check_logged_in');
-    url = url.replace('static/', '');
-    return this.http.get(url);
+    return this.http.get('/api/spotify/check_logged_in');
   }
+
+  // playlist_replace() {
+
+  // }
 }
