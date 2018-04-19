@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Location } from '@angular/common';
+
+import { catchError } from 'rxjs/operators';
+
+import { MixedditErrorService } from './mixeddit-error.service';
 
 @Injectable()
 export class SpotifyService {
 
-  api = 'spotify/';
+  api = 'api/spotify/';
 
   constructor(private http: HttpClient,
-              private location: Location) { }
+              private mixedditErrorService: MixedditErrorService) { }
 
   getLoggedIn() {
-    return this.http.get('/api/spotify/check_logged_in');
+    return this.http.get(this.api + 'check_logged_in/');
   }
 
   putPlaylistReplace(mixedditValue) {
-    return this.http.put('api/spotify/playlist_replace/', mixedditValue);
+    return this.http.put(this.api + 'playlist_replace/', mixedditValue)
+      .pipe(
+        catchError(this.mixedditErrorService.handleError)
+      );
   }
 }

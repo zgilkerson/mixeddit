@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { SpotifyService } from '../spotify.service';
+import { MixedditError } from '../mixeddit-error';
 
 @Component({
   selector: 'app-user',
@@ -21,10 +22,11 @@ export class UserComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.mixedditForm.value);
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
-      (data) => this.mixedditValue = data,
-      (error: HttpErrorResponse) => this.mixedditValue = error
+      (data) => this.mixedditValue = 'received data',
+      (error: MixedditError) => {
+        this.mixedditValue = error;
+      }
     );
   }
 

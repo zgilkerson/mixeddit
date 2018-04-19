@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SpotifyService } from './spotify.service';
+import { MixedditErrorService } from './mixeddit-error.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -36,7 +37,7 @@ import { GuestComponent } from './guest/guest.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

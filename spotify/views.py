@@ -83,11 +83,17 @@ class SpotifyViewSet(viewsets.ViewSet):
         try:
             mixeddit_list = Reddit.parseSubreddit(subreddit)
         except prawcore.exceptions.PrawcoreException:
-            return Response("Could not fetch subreddit",
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': {
+                'status': status.HTTP_404_NOT_FOUND,
+                'message': 'invalid subreddit'
+            }},
+                            status=status.HTTP_404_NOT_FOUND)
         spotify = Spotify(request.session)
         try:
             spotify.playlist_replace(playlist, mixeddit_list)
         except SpotifyRunTimeError as e:
-            return Response(e.error_message, status=e.error_code)
+            return Response({'error': {
+                'status': e.error_code,
+                'message': e.error_message
+            }}, status=e.error_code)
         return Response(request.data, status=status.HTTP_200_OK)

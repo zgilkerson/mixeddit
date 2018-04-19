@@ -76,7 +76,7 @@ class Spotify:
         playlist_id = self.playlist_get_id(user_id, playlist)
         if (playlist_id is None):
             raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,
-                                      "Could not find playlist")
+                                      "invalid playlist")
         track_uri_list = []
         for reddit_track in mixeddit_list:
             try:
