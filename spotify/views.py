@@ -1,5 +1,6 @@
 import configparser
 from requests_oauthlib import OAuth2Session
+import logging
 
 from django.shortcuts import redirect
 
@@ -14,6 +15,8 @@ from reddit.reddit import Reddit
 from spotify.spotify import Spotify
 from spotify.spotify_error import SpotifyRunTimeError, SpotifyRunTimeError
 
+logger = logging.getLogger(__name__)
+
 
 class SpotifyViewSet(viewsets.ViewSet):
     parser_classes = (JSONParser,)
@@ -25,7 +28,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         config = configparser.ConfigParser()
         config.read('spotify.ini')
         client_id = config['spotify']['client_id']
-        redirect_uri = 'https://localhost/spotify/callback'
+        redirect_uri = 'https://localhost/api/spotify/callback'
         oauth = OAuth2Session(client_id=client_id,
                               redirect_uri=redirect_uri,
                               scope=scope)
@@ -40,7 +43,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         config.read('spotify.ini')
         client_id = config['spotify']['client_id']
         client_secret = config['spotify']['client_secret']
-        redirect_uri = 'https://localhost/spotify/callback'
+        redirect_uri = 'https://localhost/api/spotify/callback'
         oauth = OAuth2Session(client_id=client_id,
                               redirect_uri=redirect_uri,
                               state=request.session['oauth_state'])
@@ -50,7 +53,7 @@ class SpotifyViewSet(viewsets.ViewSet):
             authorization_response=request.build_absolute_uri(),
             client_secret=client_secret)
         request.session['token'] = token
-        return redirect(reverse('spotify-me'))
+        return redirect('/')
 
     @action(methods=['get'], detail=False)
     def me(self, request, *args, **kwargs):
@@ -70,12 +73,12 @@ class SpotifyViewSet(viewsets.ViewSet):
     @action(methods=['put'], detail=False)
     def playlist_replace(self, request, *args, **kwargs):
         try:
-            session = request.session['token']
+            request.session['token']
         except KeyError:
             return Response(status=status.HTTP_403_FORBIDDEN)
         subreddit = request.data['subreddit']
         playlist = request.data['playlist']
         mixeddit_list = Reddit.parseSubreddit(subreddit)
-        spotify = Spotify(session)
+        spotify = Spotify(request.session)
         spotify.playlist_replace(playlist, mixeddit_list)
         return Response(request.data, status=status.HTTP_200_OK)

@@ -1,16 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
-import { MatCardModule } from '@angular/material/card';
 
+import { MatButtonModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { SpotifyService } from './spotify.service';
 
 import { AppComponent } from './app.component';
-import { SpotifyService } from './spotify.service';
-import { HttpClientModule } from '@angular/common/http';
-import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
-import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
 import { GuestComponent } from './guest/guest.component';
 
@@ -27,8 +31,10 @@ import { GuestComponent } from './guest/guest.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule,
-    AppRoutingModule
+    MatFormFieldModule,
+    MatInputModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [SpotifyService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
