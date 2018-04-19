@@ -3,7 +3,10 @@ import json
 import requests
 import logging
 
+from rest_framework import status
+
 from requests_oauthlib import OAuth2Session
+
 from spotify.spotify_error import SpotifySetUpError, SpotifyRunTimeError
 
 logger = logging.getLogger(__name__)
@@ -71,6 +74,9 @@ class Spotify:
         """Replaces the given playlist with the list of provided tracks."""
         user_id = self.user_get_current_user_id()
         playlist_id = self.playlist_get_id(user_id, playlist)
+        if (playlist_id is None):
+            raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,
+                                      "invalid playlist")
         track_uri_list = []
         for reddit_track in mixeddit_list:
             try:

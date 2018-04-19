@@ -4,6 +4,7 @@
       <mat-label>Subreddit</mat-label>
       <input matInput required placeholder="metal" formControlName="subreddit">
       <span matPrefix>r/&nbsp;</span>
+      <mat-error *ngIf="mixedditForm.invalid">Could not find subreddit</mat-error>
     </mat-form-field>
   </div>
   <div>
@@ -12,11 +13,10 @@
         required placeholder="Spotify Playlist"
         matAutosizeMaxRows="2" formControlName="playlist">
       </textarea>
+      <mat-error *ngIf="mixedditForm.invalid">Could not find playlist</mat-error>
     </mat-form-field>
   </div>
   <div>
     <button mat-raised-button class="primary" type="submit" [disabled]="mixedditForm.invalid">Generate Playlist</button>
   </div>
 </form>
-<p>Form value: {{ mixedditValue | json }}</p>
-<p>Form value: {{ mixedditForm.status | json }}</p>

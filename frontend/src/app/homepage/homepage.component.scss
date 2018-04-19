@@ -3,6 +3,11 @@
 @mixin homepage-component-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .mat-snack-bar-container {
+      background-color: mat-color($warn);
+  }
 }
 
 .homepage-header-background {
