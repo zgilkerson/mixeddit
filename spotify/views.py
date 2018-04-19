@@ -10,10 +10,12 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
+import prawcore.exceptions
+
 from reddit.reddit import Reddit
 
 from spotify.spotify import Spotify
-from spotify.spotify_error import SpotifyRunTimeError, SpotifyRunTimeError
+from spotify.spotify_error import SpotifyRunTimeError, SpotifySetUpError
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +80,14 @@ class SpotifyViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_403_FORBIDDEN)
         subreddit = request.data['subreddit']
         playlist = request.data['playlist']
-        mixeddit_list = Reddit.parseSubreddit(subreddit)
+        try:
+            mixeddit_list = Reddit.parseSubreddit(subreddit)
+        except prawcore.exceptions.PrawcoreException:
+            return Response("Could not fetch subreddit",
+                            status=status.HTTP_400_BAD_REQUEST)
         spotify = Spotify(request.session)
-        spotify.playlist_replace(playlist, mixeddit_list)
+        try:
+            spotify.playlist_replace(playlist, mixeddit_list)
+        except SpotifyRunTimeError as e:
+            return Response(e.error_message, status=e.error_code)
         return Response(request.data, status=status.HTTP_200_OK)
