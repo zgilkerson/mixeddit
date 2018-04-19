@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+
+import { MatSnackBar } from '@angular/material';
 
 import { SpotifyService } from '../spotify.service';
 import { MixedditError } from '../mixeddit-error';
@@ -15,7 +16,8 @@ export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
   mixedditValue: any = {'': ''};
 
-  constructor(private fb: FormBuilder, private spotify: SpotifyService) {
+  constructor(private fb: FormBuilder, private spotify: SpotifyService,
+              public snackBar: MatSnackBar) {
     this.createForm();
   }
 
@@ -25,7 +27,17 @@ export class UserComponent implements OnInit {
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
       (data) => this.mixedditValue = 'received data',
       (error: MixedditError) => {
-        this.mixedditValue = error;
+        if (error.message.toLowerCase().includes('subreddit')) {
+          this.mixedditForm.get('subreddit').setErrors({ 'invalidSubreddit': true });
+        } else if (error.message.toLowerCase().includes('playlist')) {
+          this.mixedditForm.get('playlist').setErrors({ 'invalidPlaylist': true });
+        } else {
+          this.snackBar.open(
+            'Sorry there was a problem creating the playlist',
+            'Okay', {
+              duration: 5000,
+            });
+        }
       }
     );
   }
