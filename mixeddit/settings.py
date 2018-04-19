@@ -146,3 +146,38 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'django.debug.log',
+        },
+        'errorFile': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'django.error.log',
+        }
+    },
+    'loggers': {
+        # 'django': {
+        #     'handlers': ['file'],
+        #     'level': 'DEBUG',
+        #     'propagate': True,
+        # },
+        'spotify': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        # '' is capture all
+        '': {
+            'handlers': ['errorFile'],
+            'level': 'ERROR',
+            'propagate': True,
+        }
+    },
+}

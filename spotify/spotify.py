@@ -1,8 +1,12 @@
 import configparser
 import json
 import requests
+import logging
+
 from requests_oauthlib import OAuth2Session
 from spotify.spotify_error import SpotifySetUpError, SpotifyRunTimeError
+
+logger = logging.getLogger(__name__)
 
 
 class Spotify:

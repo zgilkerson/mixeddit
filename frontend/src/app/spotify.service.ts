@@ -14,7 +14,7 @@ export class SpotifyService {
     return this.http.get('/api/spotify/check_logged_in');
   }
 
-  // playlist_replace() {
-
-  // }
+  putPlaylistReplace(mixedditValue) {
+    return this.http.put('api/spotify/playlist_replace/', mixedditValue);
+  }
 }

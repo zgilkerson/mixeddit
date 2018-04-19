@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { HttpErrorResponse } from '@angular/common/http';
 
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
-import { HttpErrorResponse } from '@angular/common/http';
 import { SpotifyService } from '../spotify.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { SpotifyService } from '../spotify.service';
 })
 export class HomepageComponent implements OnInit {
 
-  logged_in = false;
+  logged_in: boolean;
 
   constructor(private spotify: SpotifyService) {}
 
