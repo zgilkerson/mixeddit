@@ -25,6 +25,9 @@ config = configparser.ConfigParser()
 config.read('django.ini')
 SECRET_KEY = config['django']['secret_key']
 
+# Docker toggle
+DOCKER = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -71,11 +74,11 @@ WSGI_APPLICATION = 'mixeddit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config['django']['dbname'],
-        'USER': config['django']['dbuser'],
-        'PASSWORD': config['django']['dbpassword'],
-        'HOST': config['django']['dbhost'],
-        'PORT': config['django']['dbport'],
+        'NAME': 'postgres' if DOCKER else config['django']['dbname'],
+        'USER':  'postgres' if DOCKER else config['django']['dbuser'],
+        'PASSWORD': '' if DOCKER else config['django']['dbpassword'],
+        'HOST':  'db' if DOCKER else config['django']['dbhost'],
+        'PORT':  5432 if DOCKER else config['django']['dbport'],
     }
 }
 
