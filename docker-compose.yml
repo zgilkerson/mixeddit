@@ -9,14 +9,17 @@ services:
     volumes:
       - .:/mixeddit
     expose:
-      - "8000"
+      - "443"
     depends_on:
       - db
   nginx:
     image: nginx:latest
     ports:
       - "80:80"
-    # volumes:
-      # - ./config/nginx:/etc/nginx/conf.d
+      - "443:443"
+    volumes:
+      - ./nginx/sites-available:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./frontend/dist:/var/www/html
     depends_on:
       - web
