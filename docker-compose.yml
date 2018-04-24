@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn mixeddit.wsgi:application -c gunicorn.conf.py"
+    volumes:
+      - .:/mixeddit
+    expose:
+      - "443"
+    depends_on:
+      - db
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/sites-available:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./frontend/dist:/var/www/html
+    depends_on:
+      - web

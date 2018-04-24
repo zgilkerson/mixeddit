@@ -1,6 +1,9 @@
-bind = 'unix:gunicorn.socket'
+bind = '0.0.0.0:443'
+# bind = 'unix:gunicorn.socket'
 reload = True
 accesslog = 'gunicorn.access.log'
 errorlog = 'gunicorn.error.log'
 capture_output = False
 loglevel = 'info'
+keyfile = 'nginx/certs/development.key'
+certfile = 'nginx/certs/development.crt'
