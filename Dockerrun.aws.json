@@ -8,19 +8,19 @@
       }
     },
     {
-      "name": "nginx:sites-available",
+      "name": "nginx_sites-available",
       "host": {
         "sourcePath": "/var/app/current/mixeddit/nginx/sites-available"
       }
     },
     {
-      "name": "nginx:certs",
+      "name": "nginx_certs",
       "host": {
         "sourcePath": "/var/app/current/mixeddit/nginx/certs"
       }
     },
     {
-      "name": "nginx:frontend",
+      "name": "nginx_frontend",
       "host": {
         "sourcePath": "/var/app/current/mixeddit/frontend/dist"
       }
@@ -30,13 +30,14 @@
     {
       "name": "db",
       "image": "postgres",
-      "essential": true,
+      "essential": false,
       "memory": 128
     },
     {
       "name": "web",
       "image": "zgilkerson/mixeddit:latest",
-      "command": ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn mixeddit.wsgi:application -c gunicorn.conf.py"],
+      "essential": true,
+      "command": ["/bin/bash", "-c", "python /mixeddit/manage.py makemigrations && python /mixeddit/manage.py migrate && gunicorn /mixeddit/mixeddit.wsgi:application -c /mixeddit/gunicorn.conf.py"],
       "memory": 256,
       "portMappings": [
         {
@@ -65,22 +66,19 @@
           "containerPort": 443
         }
       ],
-      "links": [
-        "web"
-      ],
       "mountPoints": [
         {
-          "sourceVolume": "nginx:sites-available",
+          "sourceVolume": "nginx_sites-available",
           "containerPath": "/etc/nginx/conf.d",
           "readOnly": true
         },
         {
-          "sourceVolume": "nginx:certs",
+          "sourceVolume": "nginx_certs",
           "containerPath": "/etc/nginx/certs",
           "readOnly": true
         },
         {
-          "sourceVolume": "nginx:frontend",
+          "sourceVolume": "nginx_frontend",
           "containerPath": "/var/www/html"
         }
       ]
