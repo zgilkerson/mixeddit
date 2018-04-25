@@ -74,11 +74,16 @@ WSGI_APPLICATION = 'mixeddit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres' if DOCKER else config['django']['dbname'],
-        'USER':  'postgres' if DOCKER else config['django']['dbuser'],
-        'PASSWORD': '' if DOCKER else config['django']['dbpassword'],
-        'HOST':  'db' if DOCKER else config['django']['dbhost'],
-        'PORT':  5432 if DOCKER else config['django']['dbport'],
+        'NAME': (os.environ['RDS_DB_NAME']
+                 if DOCKER else config['django']['dbname']),
+        'USER': (os.environ['RDS_USERNAME']
+                 if DOCKER else config['django']['dbuser']),
+        'PASSWORD': (os.environ['RDS_PASSWORD']
+                     if DOCKER else config['django']['dbpassword']),
+        'HOST': (os.environ['RDS_HOSTNAME']
+                 if DOCKER else config['django']['dbhost']),
+        'PORT': (os.environ['RDS_PORT']
+                 if DOCKER else config['django']['dbport']),
     }
 }
 
