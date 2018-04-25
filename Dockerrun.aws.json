@@ -4,25 +4,25 @@
     {
       "name": "web",
       "host": {
-        "sourcePath": "/var/app/current/mixeddit"
+        "sourcePath": "/var/app/current"
       }
     },
     {
       "name": "nginx_sites-available",
       "host": {
-        "sourcePath": "/var/app/current/mixeddit/nginx/sites-available"
+        "sourcePath": "/var/app/current/nginx/sites-available"
       }
     },
     {
       "name": "nginx_certs",
       "host": {
-        "sourcePath": "/var/app/current/mixeddit/nginx/certs"
+        "sourcePath": "/var/app/current/nginx/certs"
       }
     },
     {
       "name": "nginx_frontend",
       "host": {
-        "sourcePath": "/var/app/current/mixeddit/frontend/dist"
+        "sourcePath": "/var/app/current/frontend/dist"
       }
     }
   ],
@@ -37,7 +37,7 @@
       "name": "web",
       "image": "zgilkerson/mixeddit:latest",
       "essential": true,
-      "command": ["/bin/bash", "-c", "python /mixeddit/manage.py makemigrations && python /mixeddit/manage.py migrate && gunicorn /mixeddit/mixeddit.wsgi:application -c /mixeddit/gunicorn.conf.py"],
+      "command": ["/bin/bash", "-c", "cd /mixeddit && python manage.py makemigrations && python manage.py migrate && gunicorn mixeddit.wsgi:application -c gunicorn.conf.py"],
       "memory": 256,
       "portMappings": [
         {
@@ -56,6 +56,9 @@
       "image": "nginx:latest",
       "essential": true,
       "memory": 128,
+      "links": [
+        "web"
+      ],
       "portMappings": [
         {
           "hostPort": 80,
