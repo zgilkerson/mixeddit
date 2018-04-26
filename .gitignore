@@ -6,6 +6,7 @@
 static/
 *.crt
 *.key
+*.zip
 
 # Generic Python Ignore from Github
 # Byte-compiled / optimized / DLL files

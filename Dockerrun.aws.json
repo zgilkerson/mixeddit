@@ -1,0 +1,94 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "web",
+      "host": {
+        "sourcePath": "/var/app/current"
+      }
+    },
+    {
+      "name": "nginx_sites-available",
+      "host": {
+        "sourcePath": "/var/app/current/nginx/sites-available"
+      }
+    },
+    {
+      "name": "nginx_certs",
+      "host": {
+        "sourcePath": "/var/app/current/nginx/certs"
+      }
+    },
+    {
+      "name": "nginx_frontend",
+      "host": {
+        "sourcePath": "/var/app/current/frontend/dist"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "db",
+      "image": "postgres",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "web",
+      "image": "zgilkerson/mixeddit:latest",
+      "essential": true,
+      "command": ["/bin/bash", "-c", "cd /mixeddit && python manage.py makemigrations && python manage.py migrate && gunicorn mixeddit.wsgi:application -c gunicorn.conf.py"],
+      "memory": 256,
+      "portMappings": [
+        {
+          "containerPort": 443
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "web",
+          "containerPath": "/mixeddit"
+        }
+      ]
+    },
+    {
+      "name": "nginx",
+      "image": "nginx:latest",
+      "essential": true,
+      "memory": 128,
+      "links": [
+        "web"
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }, 
+        {
+          "hostPort": 443,
+          "containerPort": 443
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "nginx_sites-available",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx_certs",
+          "containerPath": "/etc/nginx/certs",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "nginx_frontend",
+          "containerPath": "/var/www/html"
+        }
+      ]
+    }
+  ],
+  "authentication": {
+    "bucket": "elasticbeanstalk-us-east-2-034569686782",
+    "key": "config.json"
+  }
+}

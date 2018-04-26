@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
   web:
-    build: .
+    image: zgilkerson/mixeddit:latest
     command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn mixeddit.wsgi:application -c gunicorn.conf.py"
     volumes:
       - .:/mixeddit
