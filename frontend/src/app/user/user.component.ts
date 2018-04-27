@@ -14,7 +14,7 @@ import { MixedditError } from '../mixeddit-error';
 })
 export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
-  mixedditValue: any = {'': ''};
+  loading = false;
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
@@ -24,9 +24,13 @@ export class UserComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
+    this.loading = true;
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
-      (data) => this.mixedditValue = 'received data',
+      (data) => {
+        this.loading = false;
+      },
       (error: MixedditError) => {
+        this.loading = false;
         if (error.message.toLowerCase().includes('subreddit')) {
           this.mixedditForm.get('subreddit').setErrors({ 'invalidSubreddit': true });
         } else if (error.message.toLowerCase().includes('playlist')) {

@@ -8,7 +8,7 @@
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field class="fill-width">
       <textarea matInput matTextareaAutosize
         required placeholder="Spotify Playlist"
         matAutosizeMaxRows="2" formControlName="playlist">
@@ -16,7 +16,10 @@
       <mat-error *ngIf="mixedditForm.invalid">Could not find playlist</mat-error>
     </mat-form-field>
   </div>
-  <div>
+  <div *ngIf="!loading" class="center-div">
     <button mat-raised-button class="primary" type="submit" [disabled]="mixedditForm.invalid">Generate Playlist</button>
+  </div>
+  <div *ngIf="loading" class="center-div">
+    <mat-spinner></mat-spinner>
   </div>
 </form>

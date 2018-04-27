@@ -1,0 +1,9 @@
+.center-div {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.fill-width {
+    width: 100%;
+}
