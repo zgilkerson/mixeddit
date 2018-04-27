@@ -10,6 +10,8 @@ services:
       - .:/mixeddit
     expose:
       - "443"
+    environment: 
+      - LOCAL=1
     depends_on:
       - db
   nginx:

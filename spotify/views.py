@@ -2,6 +2,7 @@ import configparser
 from requests_oauthlib import OAuth2Session
 import logging
 
+from django.conf import settings
 from django.shortcuts import redirect
 
 from rest_framework import status, viewsets
@@ -18,7 +19,10 @@ from spotify.spotify import Spotify
 from spotify.spotify_error import SpotifyRunTimeError, SpotifySetUpError
 
 logger = logging.getLogger(__name__)
-redirectHost = 'mixeddit-env.2zmntaarij.us-east-2.elasticbeanstalk.com'
+if settings.LOCAL:
+    redirectHost = 'localhost'
+else:
+    redirectHost = 'mixeddit.com'
 
 
 class SpotifyViewSet(viewsets.ViewSet):
