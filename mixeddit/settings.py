@@ -25,15 +25,16 @@ config = configparser.ConfigParser()
 config.read('django.ini')
 SECRET_KEY = config['django']['secret_key']
 
-# Docker toggle
-DOCKER = True
+# Check environment
+LOCAL = True if "LOCAL" in os.environ else False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
-    '.elasticbeanstalk.com'
+    '.elasticbeanstalk.com',
+    '.mixeddit.com'
     ]
 
 ADMIN_ENABLED = False
@@ -77,16 +78,11 @@ WSGI_APPLICATION = 'mixeddit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': (os.environ['RDS_DB_NAME']
-                 if DOCKER else config['django']['dbname']),
-        'USER': (os.environ['RDS_USERNAME']
-                 if DOCKER else config['django']['dbuser']),
-        'PASSWORD': (os.environ['RDS_PASSWORD']
-                     if DOCKER else config['django']['dbpassword']),
-        'HOST': (os.environ['RDS_HOSTNAME']
-                 if DOCKER else config['django']['dbhost']),
-        'PORT': (os.environ['RDS_PORT']
-                 if DOCKER else config['django']['dbport']),
+        'NAME': 'postgres' if LOCAL else os.environ['RDS_DB_NAME'],
+        'USER': 'postgres' if LOCAL else os.environ['RDS_USERNAME'],
+        'PASSWORD': '' if LOCAL else os.environ['RDS_PASSWORD'],
+        'HOST': 'db' if LOCAL else os.environ['RDS_HOSTNAME'],
+        'PORT': 5432 if LOCAL else os.environ['RDS_PORT'],
     }
 }
 
