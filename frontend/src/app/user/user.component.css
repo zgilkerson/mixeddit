@@ -7,3 +7,7 @@
 .fill-width {
     width: 100%;
 }
+
+.vert-margin {
+    margin: 15px;
+}

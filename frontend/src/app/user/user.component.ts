@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, FormGroup, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material';
 
@@ -15,6 +15,7 @@ import { MixedditError } from '../mixeddit-error';
 export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
   loading = false;
+  replaceSuccess = false;
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
@@ -23,11 +24,14 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
+  onSubmit(formDirective: FormGroupDirective) {
     this.loading = true;
+    this.replaceSuccess = false;
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
       (data) => {
         this.loading = false;
+        this.replaceSuccess = true;
+        formDirective.resetForm();
       },
       (error: MixedditError) => {
         this.loading = false;
