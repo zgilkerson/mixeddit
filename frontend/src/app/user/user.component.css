@@ -11,3 +11,7 @@
 .vert-margin {
     margin: 15px;
 }
+
+mat-card {
+    text-align: center;
+}

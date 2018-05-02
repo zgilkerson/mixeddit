@@ -5,12 +5,22 @@ import { MatSnackBar } from '@angular/material';
 
 import { SpotifyService } from '../spotify.service';
 import { MixedditError } from '../mixeddit-error';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers: [SpotifyService]
+  providers: [SpotifyService],
+  animations: [
+    trigger('showSuccess', [
+      transition(':leave', [
+        animate(2000, style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
@@ -31,6 +41,9 @@ export class UserComponent implements OnInit {
       (data) => {
         this.loading = false;
         this.replaceSuccess = true;
+        setTimeout(() => {
+          this.replaceSuccess = false;
+        }, 2000);
         formDirective.resetForm();
       },
       (error: MixedditError) => {

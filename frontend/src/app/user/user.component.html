@@ -38,5 +38,5 @@
   <div *ngIf="loading" class="center-div vert-margin">
     <mat-spinner></mat-spinner>
   </div>
-  <mat-card *ngIf="replaceSuccess" class="center-div primary">Playlist has been updated!</mat-card>
 </form>
+<mat-card *ngIf="replaceSuccess" class="center-div primary" [@showSuccess]="replaceSuccess">Playlist has been updated!</mat-card>
