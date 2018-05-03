@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,12 +35,14 @@ import { GuestComponent } from './guest/guest.component';
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    AppRoutingModule,
-    ReactiveFormsModule
+    MatProgressSpinnerModule,
+    MatCardModule,
   ],
   providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]

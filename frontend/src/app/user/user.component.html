@@ -1,22 +1,42 @@
-<form [formGroup]="mixedditForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="mixedditForm" #mixedditFormDirective="ngForm" (ngSubmit)="onSubmit(mixedditFormDirective)">
   <div>
-    <mat-form-field>
+    <mat-form-field class="fill-width">
       <mat-label>Subreddit</mat-label>
       <input matInput required placeholder="metal" formControlName="subreddit">
       <span matPrefix>r/&nbsp;</span>
-      <mat-error *ngIf="mixedditForm.invalid">Could not find subreddit</mat-error>
+      <mat-error *ngIf="mixedditForm.invalid && (mixedditForm.get('subreddit').dirty ||
+          mixedditForm.get('subreddit').touched)">
+        <mat-error *ngIf="mixedditForm.get('subreddit').hasError('required')">
+          Subreddit is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="!mixedditForm.get('subreddit').
+          hasError('required')">Could not find subreddit
+        </mat-error>
+      </mat-error>
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field class="fill-width">
       <textarea matInput matTextareaAutosize
         required placeholder="Spotify Playlist"
         matAutosizeMaxRows="2" formControlName="playlist">
       </textarea>
-      <mat-error *ngIf="mixedditForm.invalid">Could not find playlist</mat-error>
+      <mat-error *ngIf="mixedditForm.invalid && (mixedditForm.get('playlist').dirty ||
+          mixedditForm.get('playlist').touched)">
+        <mat-error *ngIf="mixedditForm.get('playlist').hasError('required')">
+          Playlist is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="!mixedditForm.get('playlist').
+          hasError('required')">Could not find playlist
+        </mat-error>
+      </mat-error>
     </mat-form-field>
   </div>
-  <div>
+  <div *ngIf="!loading" class="center-div vert-margin">
     <button mat-raised-button class="primary" type="submit" [disabled]="mixedditForm.invalid">Generate Playlist</button>
   </div>
+  <div *ngIf="loading" class="center-div vert-margin">
+    <mat-spinner></mat-spinner>
+  </div>
 </form>
+<mat-card *ngIf="replaceSuccess" class="center-div primary" [@showSuccess]="replaceSuccess">{{replaceMessage}}!</mat-card>

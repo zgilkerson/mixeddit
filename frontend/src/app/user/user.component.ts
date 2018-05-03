@@ -1,20 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, FormGroup, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material';
 
 import { SpotifyService } from '../spotify.service';
 import { MixedditError } from '../mixeddit-error';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
-  providers: [SpotifyService]
+  providers: [SpotifyService],
+  animations: [
+    trigger('showSuccess', [
+      transition(':leave', [
+        animate(2000, style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
-  mixedditValue: any = {'': ''};
+  loading = false;
+  replaceSuccess = false;
+  replaceMessage = '';
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
@@ -23,10 +35,21 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
+  onSubmit(formDirective: FormGroupDirective) {
+    this.loading = true;
+    this.replaceSuccess = false;
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
-      (data) => this.mixedditValue = 'received data',
+      (data) => {
+        this.loading = false;
+        this.replaceSuccess = true;
+        this.replaceMessage = data['playlist'] + ' has been updated using r/' + data['subreddit'];
+        setTimeout(() => {
+          this.replaceSuccess = false;
+        }, 3000);
+        formDirective.resetForm();
+      },
       (error: MixedditError) => {
+        this.loading = false;
         if (error.message.toLowerCase().includes('subreddit')) {
           this.mixedditForm.get('subreddit').setErrors({ 'invalidSubreddit': true });
         } else if (error.message.toLowerCase().includes('playlist')) {
