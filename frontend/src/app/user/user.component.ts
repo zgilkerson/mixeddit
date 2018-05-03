@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   mixedditForm: FormGroup;
   loading = false;
   replaceSuccess = false;
+  replaceMessage = '';
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
@@ -41,9 +42,10 @@ export class UserComponent implements OnInit {
       (data) => {
         this.loading = false;
         this.replaceSuccess = true;
+        this.replaceMessage = data['playlist'] + ' has been updated using r/' + data['subreddit'];
         setTimeout(() => {
           this.replaceSuccess = false;
-        }, 2000);
+        }, 3000);
         formDirective.resetForm();
       },
       (error: MixedditError) => {
