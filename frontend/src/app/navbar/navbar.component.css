@@ -1,0 +1,26 @@
+.mixeddit-logo {
+  height: 36px;
+}
+
+.toolbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+nav .mat-button {
+  font-weight: 600;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: white;
+}

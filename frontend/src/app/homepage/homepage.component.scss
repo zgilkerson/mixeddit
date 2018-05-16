@@ -42,11 +42,8 @@ app-homepage .homepage-header-headline {
 }
 
 .center {
-    -webkit-box-align: center;
     align-items: center;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
     padding: 16px;
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (unknown)"
+   sodipodi:docname="mixeddit_white_initals.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="489.91455"
+     inkscape:cy="573.87096"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:measure-start="0,0"
+     inkscape:measure-end="0,0"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid10" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:Jaldi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;-inkscape-font-specification:Jaldi;font-stretch:normal;font-variant:normal;"
+       x="48.380955"
+       y="76.261909"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         x="48.380955"
+         y="85.625679"
+         style="stroke-width:0.26458332;-inkscape-font-specification:Jaldi;font-family:Jaldi;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:Jaldi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;-inkscape-font-specification:Jaldi;font-stretch:normal;font-variant:normal;"
+       x="48.380955"
+       y="72.482147"
+       id="text18"><tspan
+         sodipodi:role="line"
+         id="tspan16"
+         x="48.380955"
+         y="81.845917"
+         style="stroke-width:0.26458332;-inkscape-font-specification:Jaldi;font-family:Jaldi;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:113.17299652px;line-height:1.25;font-family:Jaldi;-inkscape-font-specification:Jaldi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.58944261"
+       x="26.787605"
+       y="150.37479"
+       id="text3737"
+       transform="scale(1.0503969,0.9520211)"><tspan
+         sodipodi:role="line"
+         id="tspan3735"
+         x="26.787605"
+         y="150.37479"
+         style="font-size:113.17299652px;fill:#ffffff;stroke-width:0.58944261">M</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:123.16885376px;line-height:1.25;font-family:Jaldi;-inkscape-font-specification:Jaldi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.64150447"
+       x="90.238235"
+       y="235.82927"
+       id="text3741"
+       transform="scale(1.1431891,0.8747459)"><tspan
+         sodipodi:role="line"
+         id="tspan3739"
+         x="90.238235"
+         y="235.82927"
+         style="font-size:123.16885376px;fill:#ffffff;stroke-width:0.64150447">X</tspan></text>
+  </g>
+</svg>

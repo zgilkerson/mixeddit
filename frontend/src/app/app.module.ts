@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -22,6 +23,7 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { UserComponent } from './user/user.component';
 import { GuestComponent } from './guest/guest.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { GuestComponent } from './guest/guest.component';
     AppComponent,
     HomepageComponent,
     UserComponent,
-    GuestComponent
+    GuestComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { GuestComponent } from './guest/guest.component';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatToolbarModule,
   ],
   providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
