@@ -1,0 +1,26 @@
+<nav class="toolbar-header">
+  <a mat-button routerLink="/">
+    <img class="mixeddit-logo" src="./assets/mixeddit/mixeddit_white_initals.svg">
+    <span>Mixeddit</span>
+  </a>
+  <a mat-button routerLink="/faq" class="toolbar-large">
+    <span>FAQ</span>
+  </a>
+  <a mat-button routerLink="/about" class="toolbar-large">
+    <span>About</span>
+  </a>
+  <div class="flex-spacer"></div>
+  <mat-icon class="dark">brightness_3</mat-icon>
+  <mat-slide-toggle [formControl]="lights"></mat-slide-toggle>
+  <mat-icon class="light">brightness_5</mat-icon>
+  <a mat-button class="toolbar-large" href="https://github.com/zgilkerson/mixeddit">
+    <img class="github-logo" src="./assets/github/github-circle-white.svg">GitHub
+  </a>
+  <a mat-icon-button class="toolbar-small" href="https://github.com/zgilkerson/mixeddit">
+    <img class="github-logo" src="./assets/github/github-circle-white.svg">
+  </a>
+</nav>
+<nav class="toolbar-small">
+  <a mat-button routerLink="/faq">FAQ</a>
+  <a mat-button routerLink="/about">About</a>
+</nav>

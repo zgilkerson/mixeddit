@@ -11,8 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SpotifyService } from './spotify.service';
@@ -22,6 +23,9 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { UserComponent } from './user/user.component';
 import { GuestComponent } from './guest/guest.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FaqComponent } from './faq/faq.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -29,7 +33,10 @@ import { GuestComponent } from './guest/guest.component';
     AppComponent,
     HomepageComponent,
     UserComponent,
-    GuestComponent
+    GuestComponent,
+    NavbarComponent,
+    FaqComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,9 @@ import { GuestComponent } from './guest/guest.component';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatIconModule,
   ],
   providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
