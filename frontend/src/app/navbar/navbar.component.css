@@ -16,6 +16,10 @@ app-navbar {
   height: 36px;
 }
 
+.light {
+    padding: 0 8px 0 3px;
+}
+
 .github-logo {
   height: 26px;
   margin: 0 4px 3px 0;

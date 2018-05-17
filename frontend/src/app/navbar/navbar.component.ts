@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  lights = new FormControl();
 
-  constructor() { }
+  constructor() {
+    this.themeSwitched();
+  }
 
   ngOnInit() {
   }
 
+  themeSwitched() {
+    this.lights.valueChanges.forEach(
+      (value: boolean) => console.log(value)
+    );
+  }
 }

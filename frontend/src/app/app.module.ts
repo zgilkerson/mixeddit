@@ -12,8 +12,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SpotifyService } from './spotify.service';
@@ -51,6 +51,8 @@ import { AboutComponent } from './about/about.component';
     MatProgressSpinnerModule,
     MatCardModule,
     MatToolbarModule,
+    MatSlideToggleModule,
+    MatIconModule,
   ],
   providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
