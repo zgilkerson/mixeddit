@@ -16,6 +16,11 @@ app-navbar {
   height: 36px;
 }
 
+.github-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
+}
+
 nav .mat-button {
   font-weight: 600;
 }

@@ -24,6 +24,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { UserComponent } from './user/user.component';
 import { GuestComponent } from './guest/guest.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FaqComponent } from './faq/faq.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomepageComponent,
     UserComponent,
     GuestComponent,
-    NavbarComponent
+    NavbarComponent,
+    FaqComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
