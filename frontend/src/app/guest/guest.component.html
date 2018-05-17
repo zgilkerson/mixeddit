@@ -9,7 +9,8 @@
 
 <div class="guest-row guest-row-reverse">
   <div class="guest-row-half">
-    <img class="reddit-logo" src="./assets/reddit/Reddit_VerticalLockup_OnDark.svg">
+    <img class="reddit-logo" *ngIf="!lights" src="./assets/reddit/Reddit_VerticalLockup_OnDark.svg">
+    <img class="reddit-logo" *ngIf="lights" src="./assets/reddit/Reddit_VerticalLockup_OnWhite.svg">
   </div>
   <div class="guest-row-desc guest-row-half">
     <h2>Choose a Subreddit</h2>

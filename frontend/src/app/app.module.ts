@@ -26,6 +26,7 @@ import { GuestComponent } from './guest/guest.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FaqComponent } from './faq/faq.component';
 import { AboutComponent } from './about/about.component';
+import { LightsService } from './lights.service';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { AboutComponent } from './about/about.component';
     MatSlideToggleModule,
     MatIconModule,
   ],
-  providers: [SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
+  providers: [LightsService, SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
