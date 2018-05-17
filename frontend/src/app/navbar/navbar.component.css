@@ -5,6 +5,7 @@ app-navbar {
   right: 0;
   color: white;
 }
+
 .toolbar-header {
   display: flex;
   flex-wrap: wrap;
@@ -16,8 +17,13 @@ app-navbar {
   height: 36px;
 }
 
+.dark {
+    color: white;
+}
+
 .light {
     padding: 0 8px 0 3px;
+    color: white;
 }
 
 .github-logo {
@@ -27,6 +33,7 @@ app-navbar {
 
 nav .mat-button {
   font-weight: 600;
+  color: white;
 }
 
 .flex-spacer {
