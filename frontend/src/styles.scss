@@ -8,6 +8,7 @@ $warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-dark-theme($primary, $accent, $warn);
+$light-theme: mat-light-theme($primary, $accent, $warn);
 // theme the angular components
 @include angular-material-theme($theme);
 
@@ -21,4 +22,18 @@ $theme: mat-dark-theme($primary, $accent, $warn);
 body {
     font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
     margin: 0;
+}
+
+.light-theme {
+    @include angular-material-theme($light-theme);
+    @include app-component-theme($light-theme);
+    @include homepage-component-theme($light-theme);
+
+    // https://github.com/angular/material2/blob/abc3d38c57146443c848d5ba26fd2fab8ca185d6/src/lib/core/_core.scss#L44
+    // ¯\_(ツ)_/¯
+    $background: map-get($light-theme, background);
+    $foreground: map-get($light-theme, foreground);
+
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
 }

@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  lights = new FormControl();
+  theme_toggle = new FormControl();
 
   constructor() {
     this.themeSwitched();
@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit {
   }
 
   themeSwitched() {
-    this.lights.valueChanges.forEach(
-      (value: boolean) => console.log(value)
+    this.theme_toggle.valueChanges.forEach(
+      (value: boolean) => document.getElementById('body').classList.toggle('light-theme')
     );
   }
 }
