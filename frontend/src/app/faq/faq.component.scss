@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+@mixin faq-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .questions-nav {
+      border-left-color: mat-color($primary);
+  }
+}
+
+.questions-nav-container {
+    padding-left: 25px;
+}
+
+.questions-nav {
+    width: 100%;
+    padding: 5px 0 10px 10px;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: primary;
+}
+
+.questions-header {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 700;
+}
