@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -6,9 +6,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.scss']
 })
-export class FaqComponent implements OnInit, AfterViewInit {
+export class FaqComponent implements OnInit {
   private fragment: string;
   _sub;
+  questions: HeaderElement[] = [];
 
   constructor(private route: ActivatedRoute) { }
 
@@ -23,11 +24,19 @@ export class FaqComponent implements OnInit, AfterViewInit {
         window.scrollTo(0, 0);
       }
     });
+    const headers = document.querySelectorAll('h3, h4');
+    for (let index = 0; index < headers.length; index++) {
+      this.questions.push({
+        id: headers[index].id,
+        innerText: headers[index].innerHTML,
+        tag: 'question-link-' + headers[index].tagName.toLowerCase()
+      });
+    }
   }
-  
-  // ngAfterViewInit() {
-  //   try {
-  //     document.querySelector('#' + this.fragment).scrollIntoView();
-  //   } catch (e) { }
-  // }
+}
+
+class HeaderElement {
+  id: string;
+  innerText: string;
+  tag: string;
 }
