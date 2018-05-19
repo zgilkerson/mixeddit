@@ -3,8 +3,11 @@
   <div class="questions-nav-container">
     <div class="questions-nav">
       <div class="questions-header">Questions</div>
-      <nav *ngFor="let question of questions">
-        <a href="faq#{{question.id}}" class="{{question.tag}}">{{question.innerText}}</a>
+      <nav>
+        <a *ngFor="let question of questions"
+            href="faq#{{question.id}}"
+            class="question-link {{question.tag}}"
+            [class.question-active]="question.active">{{question.innerText}}</a>
       </nav>
     </div>
   </div>
@@ -30,7 +33,9 @@
     <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
     <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
     <p>yeah I've no clue how to answer this.</p><h4 id="h4Question">h4 Question</h4>
-    <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
+    <p>yeah I've no clue how to answer this.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    </p><h3 id="firstQuestion">First Question</h3>
     <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
     <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
     <p>yeah I've no clue how to answer this.</p><h3 id="firstQuestion">First Question</h3>
