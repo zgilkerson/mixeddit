@@ -1,3 +1,35 @@
-<p>
-  about works!
-</p>
+<h1 class="center">About</h1>
+<div class="about-container">
+  <div class="flex-spacer"></div>
+  <div class="about">
+    <h3>Who is Mixeddit</h3>
+    <p>Mixeddit is a portmanteau of mix tape and Reddit because that is what it does.
+        As for the person actually behind Mixeddit they can be found by clicking the GitHub
+        link on the top right.</p>
+    <h3>What is Mixeddit?</h3>
+    <p>Mixeddit is a website that allows users to generate Spotify playlists from subreddits.</p>
+    <h3>When was Mixeddit created?</h3>
+    <p>The first commit for Mixeddit happened on Febuary 13, 2018 and it has been in active development since then.
+    </p>
+    <h3>Where is Mixeddit?</h3>
+    <p>Mixeddit lives in the cloud running across a couple of docker containers within an AWS ec2 instance.</p>
+    <h3>Why was Mixeddit created?</h3>
+    <p>Clicking link after link gets annoying. It's nice to have a compiled playlist on Spotify that can be
+        downloaded or shuffled. Also not choosing songs to include in the playlist allows for a chance of discovery.</p>
+    <h3>How does Mixeddit work?</h3>
+    <p>TL:DR Mixeddit->Reddit->Mixeddit->Spotify</p>
+    <p>Non-technical: Mixeddit takes the top 100 posts of the past week from a given subreddit, checks if they are in fact a song,
+      and then tells Spotify to make a playlist from them.</p>
+    <p>Technical: Mixeddit asks
+      <a href="https://praw.readthedocs.io/en/latest/index.html">praw</a>
+      for the past 100 posts of the past week and then runs it through a semi-complicated regex. The regex looks for a variety
+      of things, but mainly placement of hyphens in post titles as a means of gathering artist and track names. Hyphen placements
+      where used because after a couple weeks of watching 4-5 various music subreddits it seemed that most posters followed a
+      specific pattern of Artist - Track regardless of rules or lack thereof. From there a list of possible songs is passed from
+      the Reddit side of the house to the Spotify side of the house. The Spotify side queries Spotify for track names, searches
+      the results for a track performed by the given artist, and if successful adds the URI of the song to a list. After all
+      possible songs are checked the list of valid songs is passed to Spotify to update the provided playlist with.</p>
+    <h3></h3>
+  </div>
+  <div class="flex-spacer"></div>
+</div>
