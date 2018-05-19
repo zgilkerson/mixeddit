@@ -48,10 +48,6 @@ nav .mat-button {
     flex: 1;
 }
 
-.toolbar-large {
-    display: flex;
-}
-
 @media (max-width: 720px){
     .toolbar-small {
         display: flex;

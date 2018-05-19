@@ -1,3 +1,42 @@
-<p>
-  faq works!
-</p>
+<h1 class="center">FAQ</h1>
+<div class='questions-container'>
+  <div class="flex-spacer"></div>  
+  <div class="questions">
+    <h3 id="security-questions" class="first-question">Security Questions</h3>
+    <h4 id="mixeddit-access-spotify-password">Does Mixeddit gain access to my Spotify password?</h4>
+    <p>No. When a user logs into Mixeddit they actually do so entirely through Spotify who then alerts
+        Mixeddit if there was a successful login and the user granted permission to Mixeddit to access their
+        information.</p>
+    <h4 id="spotify-permissions-granted">What information does Spotify give Mixeddit?</h4>
+    <p>Currently Mixeddit is only asking for permission to see private playlists along with being
+        able to modify both your public and private playlists.</p>
+    <h4 id="revoke-mixeddit-acess">How do I revoke Mixeddit's access to my Spotify account?</h4>
+    <p>Access can be revoked on your <a href="https://www.spotify.com/us/account/apps/">account page</a>.</p>
+    <h3 id="bugs-errors-problems">Bugs and errors and problems, oh my!</h3>
+    <h4 id="could-not-find-playlist">Mixeddit said that it could not find my playlist but it exists.</h4>
+    <p>Currently Mixeddit is very lazy and only looks at a user's first 20 playlists. If your playlist comes after
+        that try moving it to the top. This is a known issue and will be fixed.</p>
+    <h4 id="could-not-find-subreddit">Mixeddit had a problem with the subreddit.</h4>
+    <p>This occurs when Mixeddit fails to find the provided subreddit. Please check that the subreddit exists
+        and is publicly available.</p>
+    <h4 id="song-matching">Mixeddit did not catch all the songs on the subreddit.</h4>
+    <p>Mixeddit looks for post titles that match the format Artist - Track or something to that degree.
+        If a post does not match that roughly then Mixeddit will not be able to understand it and turn it into a song.
+        Also, sometimes Mixeddit does understand the post title, but Spotify does not have that artist or song available.</p>
+    <h3 id="unanswered-problem">Unanswered Questions or Complaints</h3>
+    <!-- <h4 >None of the listed errors are MY error.</h4> -->
+    <p>If you have a question or problem please go the the GitHub repo for this site and create an issue. The repo can be 
+        accessed by clicking the GitHub logo on the top right of the web page.</p>
+  </div>
+  <div class="questions-nav-container">
+    <div class="questions-nav">
+      <div class="questions-header">Questions</div>
+      <nav>
+        <a *ngFor="let question of questions"
+            href="faq#{{question.id}}"
+            class="question-link {{question.tag}}"
+            [class.question-active]="question.active">{{question.innerText}}</a>
+      </nav>
+    </div>
+  </div>
+</div>
