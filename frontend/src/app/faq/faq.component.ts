@@ -39,15 +39,16 @@ export class FaqComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
-    for (let index = 0; index < this.headers.length; index++) {
-      if (this.visibleY(this.headers[index])) {
-        this.hqMap.get(this.headers[index]).active = true;
-      } else {
-        this.hqMap.get(this.headers[index]).active = false;
-      }
-    }
-  }
+  // Kinda works, but not a good way
+  // @HostListener('window:scroll', ['$event']) onScrollEvent($event) {
+  //   for (let index = 0; index < this.headers.length; index++) {
+  //     if (this.visibleY(this.headers[index])) {
+  //       this.hqMap.get(this.headers[index]).active = true;
+  //     } else {
+  //       this.hqMap.get(this.headers[index]).active = false;
+  //     }
+  //   }
+  // }
 
   visibleY(el: Element) {
     const rect = el.getBoundingClientRect();

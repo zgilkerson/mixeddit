@@ -12,6 +12,10 @@
   .question-link:hover, .question-active {
       color: mat-color($primary) !important;
   }
+
+  a {
+      color: mat-color($primary);
+  }
 }
 
 .questions-container {
@@ -21,13 +25,21 @@
     padding: 20px 50px 50px 20px;
 }
 
+.flex-spacer {
+  flex-grow: 1;
+}
+
 .questions {
     padding: 0 0 0 25px;
     width: 65%;
 }
 
-.flex-spacer {
-  flex-grow: 1;
+h3 {
+    margin: 35px 0 0 0;
+}
+
+h3.first-question {
+    margin: 0;
 }
 
 .questions-nav-container {
@@ -67,6 +79,6 @@ a.question-link {
     color: inherit;
 }
 
-.question-level-h4 {
+a.question-link.question-level-h4 {
     margin-left: 12px;
 }
