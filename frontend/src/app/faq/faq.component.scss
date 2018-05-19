@@ -82,3 +82,9 @@ a.question-link {
 a.question-link.question-level-h4 {
     margin-left: 12px;
 }
+
+@media (max-width: 720px){
+    .questions-nav-container {
+        display: none;
+    }
+}
