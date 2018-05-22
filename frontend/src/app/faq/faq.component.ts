@@ -26,7 +26,7 @@ export class FaqComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     });
-    this.headers = document.querySelectorAll('h3, h4');
+    this.headers = document.querySelectorAll('div.questions h3, div.questions h4');
     for (let index = 0; index < this.headers.length; index++) {
       const he: HeaderElement = {
         id: this.headers[index].id,
