@@ -8,8 +8,9 @@ from rest_framework import status
 from requests_oauthlib import OAuth2Session
 
 from spotify.spotify_error import SpotifySetUpError, SpotifyRunTimeError
+from spotify.models import Song
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 
 class Spotify:
@@ -67,30 +68,39 @@ class Spotify:
 
         all_playlists = self.playlist_get_all(user_id)
         for playlist in all_playlists['items']:
-            if(playlist['name'] == target_playlist_name):
+            if playlist['name'] == target_playlist_name:
                 return playlist['id']
 
     def playlist_replace(self, playlist, mixeddit_list):
         """Replaces the given playlist with the list of provided tracks."""
         user_id = self.user_get_current_user_id()
         playlist_id = self.playlist_get_id(user_id, playlist)
-        if (playlist_id is None):
+        if playlist_id is None:
             raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,
                                       "invalid playlist")
         track_uri_list = []
         for reddit_track in mixeddit_list:
             try:
-                search_results = self.search(reddit_track.track, 'track')
+                track_uri = Song.objects.get(  # pylint: disable=E1101
+                    artist=reddit_track.artist,
+                    track=reddit_track.track).uri
+                track_uri_list.append(track_uri)
+            except Song.DoesNotExist:  # pylint: disable=E1101
                 try:
-                    for spotify_track in search_results['tracks']['items']:
-                        if (spotify_track['artists'][0]['name'].lower() ==
-                                reddit_track.artist.lower()):
-                            track_uri_list.append(spotify_track['uri'])
-                            break
-                except KeyError:
+                    search_results = self.search(reddit_track.track, 'track')
+                    try:
+                        for spotify_track in search_results['tracks']['items']:
+                            if (spotify_track['artists'][0]['name'].lower() ==
+                                    reddit_track.artist):
+                                Song(artist=reddit_track.artist,
+                                     track=reddit_track.track,
+                                     uri=spotify_track['uri']).save()
+                                track_uri_list.append(spotify_track['uri'])
+                                break
+                    except KeyError:
+                        pass
+                except SpotifyRunTimeError:
                     pass
-            except SpotifyRunTimeError:
-                pass
 
         replace_url = (''.join([self.BASE_URL, 'users/{user_id}/playlists/'
                        '{playlist_id}/tracks'])

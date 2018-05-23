@@ -32,7 +32,7 @@ class Mixeddit:
 
         parsedTitle = REDDIT_TITLE_PATTERN.match(self.reddit_title)
         if parsedTitle is not None:
-            self.artist = parsedTitle.group('artist').strip(' \"')
-            self.track = parsedTitle.group('track').strip(' \"')
+            self.artist = parsedTitle.group('artist').strip(' \"').lower()
+            self.track = parsedTitle.group('track').strip(' \"').lower()
             if self.artist is not None and self.track is not None:
                 self.valid = True
