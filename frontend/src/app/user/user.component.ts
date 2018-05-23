@@ -102,11 +102,12 @@ export class UserComponent implements OnInit {
   createForm() {
     this.mixedditForm = this.fb.group({
       subreddit: ['', Validators.required],
+      sort_by: [this.sortBy[4]],
+      time_filter: [this.timeFilter[2].value],
+      limit: [100, [Validators.required, Validators.min(10), Validators.max(250)]],
       playlist: ['', Validators.required],
       create_playlist: [false],
       create_public: [{value: false, disabled: true}],
-      sort_by: [this.sortBy[4]],
-      time_filter: [this.timeFilter[2].value]
     });
   }
 }
