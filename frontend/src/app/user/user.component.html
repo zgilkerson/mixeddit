@@ -17,6 +17,26 @@
   </div>
   <div>
     <mat-form-field class="fill-width">
+      <mat-label>Sort Subreddit By</mat-label>
+      <mat-select formControlName="sort_by">
+        <mat-option *ngFor="let sortOption of sortBy" [value]="sortOption">
+          {{sortOption}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="fill-width">
+      <mat-label>Links From</mat-label>
+      <mat-select formControlName="time_filter">
+        <mat-option *ngFor="let time of timeFilter" [value]="time.value">
+          {{time.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="fill-width">
       <input matInput required placeholder="Spotify Playlist" formControlName="playlist">
       <mat-error *ngIf="mixedditForm.invalid && (mixedditForm.get('playlist').dirty ||
           mixedditForm.get('playlist').touched)">

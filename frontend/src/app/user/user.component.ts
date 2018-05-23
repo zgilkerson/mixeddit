@@ -27,11 +27,19 @@ export class UserComponent implements OnInit {
   loading = false;
   replaceSuccess = false;
   replaceMessage = '';
+  sortBy = ['hot', 'new', 'rising', 'controversial', 'top'];
+  timeFilter = [{ value: 'hour', viewValue: 'past hour' },
+               { value: 'day', viewValue: 'past 24 hours' },
+               { value: 'week', viewValue: 'past week' },
+               { value: 'month', viewValue: 'past month' },
+               { value: 'year', viewValue: 'past year' },
+               { value: 'all', viewValue: 'all time' }];
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
     this.createForm();
     this.toggleCreatePublic();
+    this.toggleTimeFilter();
   }
 
   ngOnInit() {}
@@ -43,6 +51,18 @@ export class UserComponent implements OnInit {
           this.mixedditForm.controls.create_public.enable();
         } else {
           this.mixedditForm.controls.create_public.disable();
+        }
+      }
+    );
+  }
+
+  toggleTimeFilter() {
+    this.mixedditForm.controls.sort_by.valueChanges.forEach(
+      (value: string) => {
+        if (value === this.sortBy[3] || value === this.sortBy[4]) {
+          this.mixedditForm.controls.time_filter.enable();
+        } else {
+          this.mixedditForm.controls.time_filter.disable();
         }
       }
     );
@@ -84,7 +104,9 @@ export class UserComponent implements OnInit {
       subreddit: ['', Validators.required],
       playlist: ['', Validators.required],
       create_playlist: [false],
-      create_public: [{value: false, disabled: true}]
+      create_public: [{value: false, disabled: true}],
+      sort_by: [this.sortBy[4]],
+      time_filter: [this.timeFilter[2].value]
     });
   }
 }
