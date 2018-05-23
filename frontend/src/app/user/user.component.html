@@ -17,10 +17,7 @@
   </div>
   <div>
     <mat-form-field class="fill-width">
-      <textarea matInput matTextareaAutosize
-        required placeholder="Spotify Playlist"
-        matAutosizeMaxRows="2" formControlName="playlist">
-      </textarea>
+      <input matInput required placeholder="Spotify Playlist" formControlName="playlist">
       <mat-error *ngIf="mixedditForm.invalid && (mixedditForm.get('playlist').dirty ||
           mixedditForm.get('playlist').touched)">
         <mat-error *ngIf="mixedditForm.get('playlist').hasError('required')">
