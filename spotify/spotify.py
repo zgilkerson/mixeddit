@@ -51,11 +51,12 @@ class Spotify:
 
         self.session['token'] = new_token
 
-    def playlist_get_all(self, user_id):
+    def playlist_get_all(self, user_id, offset=0):
         """Returns a list of all playlists that belong to the user."""
 
         playlists_url = self.BASE_URL+'users/{}/playlists'.format(user_id)
-        response = self.client.get(playlists_url)
+        payload = {'offset': offset, 'limit': 50}
+        response = self.client.get(playlists_url, params=payload)
         try:
             response.raise_for_status()
         except requests.exceptions.HTTPError:
@@ -66,10 +67,14 @@ class Spotify:
         """Returns the id of the playlist if found under the user
         or None if not found."""
 
-        all_playlists = self.playlist_get_all(user_id)
-        for playlist in all_playlists['items']:
-            if playlist['name'] == target_playlist_name:
-                return playlist['id']
+        offset = 0
+        all_playlists = self.playlist_get_all(user_id, offset)
+        while all_playlists['items']:
+            for playlist in all_playlists['items']:
+                if playlist['name'] == target_playlist_name:
+                    return playlist['id']
+            offset += 50
+            all_playlists = self.playlist_get_all(user_id, offset)
 
     def playlist_replace(self, playlist, mixeddit_list):
         """Replaces the given playlist with the list of provided tracks."""
