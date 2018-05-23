@@ -89,6 +89,12 @@ class Spotify:
                 }
                 create_url = self.BASE_URL+'users/{}/playlists'.format(user_id)
                 response = self.client.post(create_url, json=payload)
+                try:
+                    response.raise_for_status()
+                except requests.exceptions.HTTPError:
+                    raise SpotifyRunTimeError(response.status_code,
+                                              response.reason)
+                response = response.json()
                 playlist_id = response['id']
             else:
                 raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,

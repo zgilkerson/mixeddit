@@ -88,7 +88,7 @@ class SpotifyViewSet(viewsets.ViewSet):
         create_playlist = request.data['create_playlist']
         create_public = False
         if create_playlist:
-            create_public = request.data['create_public']
+            create_public = request.data['create_public'] or create_public
         try:
             mixeddit_list = Reddit.parseSubreddit(subreddit)
         except prawcore.exceptions.PrawcoreException:
