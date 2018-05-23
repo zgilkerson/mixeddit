@@ -76,13 +76,29 @@ class Spotify:
             offset += 50
             all_playlists = self.playlist_get_all(user_id, offset)
 
-    def playlist_replace(self, playlist, mixeddit_list):
+    def playlist_replace(self, playlist, mixeddit_list,
+                         create_playlist, create_public):
         """Replaces the given playlist with the list of provided tracks."""
         user_id = self.user_get_current_user_id()
         playlist_id = self.playlist_get_id(user_id, playlist)
         if playlist_id is None:
-            raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,
-                                      "invalid playlist")
+            if create_playlist:
+                payload = {
+                    'name': playlist,
+                    'public': create_public
+                }
+                create_url = self.BASE_URL+'users/{}/playlists'.format(user_id)
+                response = self.client.post(create_url, json=payload)
+                try:
+                    response.raise_for_status()
+                except requests.exceptions.HTTPError:
+                    raise SpotifyRunTimeError(response.status_code,
+                                              response.reason)
+                response = response.json()
+                playlist_id = response['id']
+            else:
+                raise SpotifyRunTimeError(status.HTTP_404_NOT_FOUND,
+                                          'invalid playlist')
         track_uri_list = []
         for reddit_track in mixeddit_list:
             try:
@@ -110,7 +126,7 @@ class Spotify:
         replace_url = (''.join([self.BASE_URL, 'users/{user_id}/playlists/'
                        '{playlist_id}/tracks'])
                        .format(user_id=user_id, playlist_id=playlist_id))
-        payload = {"uris": track_uri_list}
+        payload = {'uris': track_uri_list}
         response = self.client.put(replace_url, json=payload)
         try:
             response.raise_for_status()
