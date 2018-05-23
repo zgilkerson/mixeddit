@@ -85,6 +85,10 @@ class SpotifyViewSet(viewsets.ViewSet):
             return Response(status=status.HTTP_403_FORBIDDEN)
         subreddit = request.data['subreddit']
         playlist = request.data['playlist']
+        create_playlist = request.data['create_playlist']
+        create_public = False
+        if create_playlist:
+            create_public = request.data['create_public']
         try:
             mixeddit_list = Reddit.parseSubreddit(subreddit)
         except prawcore.exceptions.PrawcoreException:
@@ -95,7 +99,8 @@ class SpotifyViewSet(viewsets.ViewSet):
                             status=status.HTTP_404_NOT_FOUND)
         spotify = Spotify(request.session)
         try:
-            spotify.playlist_replace(playlist, mixeddit_list)
+            spotify.playlist_replace(playlist, mixeddit_list,
+                                     create_playlist, create_public)
         except SpotifyRunTimeError as e:
             return Response({'error': {
                 'status': e.error_code,
