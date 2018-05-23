@@ -83,20 +83,32 @@ class SpotifyViewSet(viewsets.ViewSet):
             request.session['token']
         except KeyError:
             return Response(status=status.HTTP_403_FORBIDDEN)
-        subreddit = request.data['subreddit']
-        playlist = request.data['playlist']
-        create_playlist = request.data['create_playlist']
+        try:
+            subreddit = request.data['subreddit']
+            sort_by = request.data['sort_by']
+            limit = request.data['limit']
+            playlist = request.data['playlist']
+            create_playlist = request.data['create_playlist']
+        except KeyError:
+            return Response({'error': {
+                'status': status.HTTP_400_BAD_REQUEST,
+                'message': 'required field was missing'
+            }}, status=status.HTTP_400_BAD_REQUEST)
+        limit = sorted((10, limit, 250))[1]
+        time_filter = None
+        if sort_by == 'top' or sort_by == 'controversial':
+            time_filter = request.data['time_filter']
         create_public = False
         if create_playlist:
             create_public = request.data['create_public'] or create_public
         try:
-            mixeddit_list = Reddit.parseSubreddit(subreddit)
+            mixeddit_list = Reddit.parseSubreddit(subreddit, sort_by,
+                                                  time_filter, limit)
         except prawcore.exceptions.PrawcoreException:
             return Response({'error': {
                 'status': status.HTTP_404_NOT_FOUND,
                 'message': 'invalid subreddit'
-            }},
-                            status=status.HTTP_404_NOT_FOUND)
+            }}, status=status.HTTP_404_NOT_FOUND)
         spotify = Spotify(request.session)
         try:
             spotify.playlist_replace(playlist, mixeddit_list,
