@@ -27,11 +27,19 @@ export class UserComponent implements OnInit {
   loading = false;
   replaceSuccess = false;
   replaceMessage = '';
+  sortBy = ['hot', 'new', 'rising', 'controversial', 'top'];
+  timeFilter = [{ value: 'hour', viewValue: 'past hour' },
+               { value: 'day', viewValue: 'past 24 hours' },
+               { value: 'week', viewValue: 'past week' },
+               { value: 'month', viewValue: 'past month' },
+               { value: 'year', viewValue: 'past year' },
+               { value: 'all', viewValue: 'all time' }];
 
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
     this.createForm();
     this.toggleCreatePublic();
+    this.toggleTimeFilter();
   }
 
   ngOnInit() {}
@@ -43,6 +51,18 @@ export class UserComponent implements OnInit {
           this.mixedditForm.controls.create_public.enable();
         } else {
           this.mixedditForm.controls.create_public.disable();
+        }
+      }
+    );
+  }
+
+  toggleTimeFilter() {
+    this.mixedditForm.controls.sort_by.valueChanges.forEach(
+      (value: string) => {
+        if (value === this.sortBy[3] || value === this.sortBy[4]) {
+          this.mixedditForm.controls.time_filter.enable();
+        } else {
+          this.mixedditForm.controls.time_filter.disable();
         }
       }
     );
@@ -61,6 +81,9 @@ export class UserComponent implements OnInit {
           this.replaceSuccess = false;
         }, 3000);
         formDirective.resetForm();
+        this.mixedditForm.controls.sort_by.setValue(this.sortBy[4]);
+        this.mixedditForm.controls.time_filter.setValue(this.timeFilter[2].value);
+        this.mixedditForm.controls.limit.setValue(100);
       },
       (error: MixedditError) => {
         this.loading = false;
@@ -82,9 +105,12 @@ export class UserComponent implements OnInit {
   createForm() {
     this.mixedditForm = this.fb.group({
       subreddit: ['', Validators.required],
+      sort_by: [this.sortBy[4]],
+      time_filter: [this.timeFilter[2].value],
+      limit: [100, [Validators.required, Validators.min(10), Validators.max(250)]],
       playlist: ['', Validators.required],
       create_playlist: [false],
-      create_public: [{value: false, disabled: true}]
+      create_public: [{value: false, disabled: true}],
     });
   }
 }
