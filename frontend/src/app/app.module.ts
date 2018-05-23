@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SpotifyService } from './spotify.service';
@@ -54,6 +55,7 @@ import { LightsService } from './lights.service';
     MatToolbarModule,
     MatSlideToggleModule,
     MatIconModule,
+    MatCheckboxModule
   ],
   providers: [LightsService, SpotifyService, MixedditErrorService, Location, {provide: LocationStrategy, useClass: PathLocationStrategy}],
   bootstrap: [AppComponent]

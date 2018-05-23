@@ -29,6 +29,14 @@
       </mat-error>
     </mat-form-field>
   </div>
+  <div>
+    <mat-checkbox formControlName="create_playlist" color="primary">Create playlist if not found</mat-checkbox>
+  </div>
+  <div style="text-align: center">
+    private
+    <mat-slide-toggle formControlName="create_public" color="primary"></mat-slide-toggle>
+    public
+  </div>
   <div *ngIf="!loading" class="center-div vert-margin">
     <button mat-raised-button class="primary" type="submit" [disabled]="mixedditForm.invalid">Generate Playlist</button>
   </div>

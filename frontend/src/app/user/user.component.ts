@@ -31,13 +31,27 @@ export class UserComponent implements OnInit {
   constructor(private fb: FormBuilder, private spotify: SpotifyService,
               public snackBar: MatSnackBar) {
     this.createForm();
+    this.toggleCreatePublic();
   }
 
   ngOnInit() {}
 
+  toggleCreatePublic() {
+    this.mixedditForm.controls.create_playlist.valueChanges.forEach(
+      (value: boolean) => {
+        if (value) {
+          this.mixedditForm.controls.create_public.enable();
+        } else {
+          this.mixedditForm.controls.create_public.disable();
+        }
+      }
+    );
+  }
+
   onSubmit(formDirective: FormGroupDirective) {
     this.loading = true;
     this.replaceSuccess = false;
+    console.log(this.mixedditForm.value);
     this.spotify.putPlaylistReplace(this.mixedditForm.value).subscribe(
       (data) => {
         this.loading = false;
@@ -68,7 +82,9 @@ export class UserComponent implements OnInit {
   createForm() {
     this.mixedditForm = this.fb.group({
       subreddit: ['', Validators.required],
-      playlist: ['', Validators.required]
+      playlist: ['', Validators.required],
+      create_playlist: [false],
+      create_public: [{value: false, disabled: true}]
     });
   }
 }
