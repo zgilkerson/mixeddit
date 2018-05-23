@@ -81,6 +81,9 @@ export class UserComponent implements OnInit {
           this.replaceSuccess = false;
         }, 3000);
         formDirective.resetForm();
+        this.mixedditForm.controls.sort_by.setValue(this.sortBy[4]);
+        this.mixedditForm.controls.time_filter.setValue(this.timeFilter[2].value);
+        this.mixedditForm.controls.limit.setValue(100);
       },
       (error: MixedditError) => {
         this.loading = false;
